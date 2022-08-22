@@ -23,10 +23,45 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
         }
-    }
 
-    &-header{
-        background-color: var(--tertiary-color);
-        height:50px;
+        &__header{
+            background-color: var(--tertiary-color);
+            height:50px;
+            border-bottom:1px solid rgba(160,160,160,0.1);
+
+            &__cell{
+                width:200px;
+                display: flex;
+                align-items: center;
+                border-right:1px solid rgba(225,225,225,0.1);
+    
+                &-title{
+                    color:white;
+                    font-size: 15px;
+                    margin:0px;
+                    padding-left:15px;
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+            }
+        }
+
+        &__field{
+            background-color: var(--secondary-color);
+            height:40px;
+
+            &__cell{
+                width:200px;
+                display: flex;
+                align-items: center;
+    
+                &-title{
+                    color:white;
+                    font-size: 15px;
+                    margin:0px;
+                    padding-left:15px;
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+            }
+        }
     }
 }
