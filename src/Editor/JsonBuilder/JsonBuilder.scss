@@ -1,5 +1,32 @@
 .json-builder{
-    width:500px;
-    height: 500px;
+    margin-left:500px;
+    margin-top:200px;
+    width:800px;
+    height: 600px;
     background-color: var(--secondary-color);
+
+    &-row{
+        background-color: var(--tertiary-color);
+        display: flex;
+
+        &__cell{
+            width:200px;
+            display: flex;
+            align-items: center;
+            border-right:1px solid rgba(225,225,225,0.1);
+
+            &-title{
+                color:white;
+                font-size: 15px;
+                margin:0px;
+                padding-left:15px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    &-header{
+        background-color: var(--tertiary-color);
+        height:50px;
+    }
 }
