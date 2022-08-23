@@ -5,7 +5,10 @@ export default function JsonBuilder(){
     return (
         <div className="json-builder">
             <JsonBuilderField isHeader={true}></JsonBuilderField>
-            <JsonBuilderField isHeader={false}></JsonBuilderField>
+            <JsonBuilderField></JsonBuilderField>
+            <JsonBuilderField></JsonBuilderField>
+            <JsonBuilderField></JsonBuilderField>
+            <JsonBuilderField></JsonBuilderField>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Field } from "../../interfaces/Field.interface";
 import { Header } from "../../interfaces/Header.interface";
+import { FieldTypeInterface, fieldTypes } from "../../models/FieldType.model";
 
 const headers : Header = {
     titles : ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE']
@@ -46,7 +47,15 @@ export default function JsonBuilderField(props : any){
                         </div>
 
                         <div className={cellPrefix}>
-                            <select></select>
+                            <select>
+                                {
+                                    fieldTypes.map((fieldType : FieldTypeInterface) => {
+                                        return (
+                                            <option>{fieldType.fieldName}</option>
+                                        )
+                                    })
+                                }
+                            </select>
                         </div>
 
                         <div className={cellPrefix}>
