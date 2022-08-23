@@ -43,6 +43,10 @@ export default function JsonBuilderField(props : any){
         setObjectOpened(!objectOpened);
     }
 
+    function onAddField(){
+        setObjectTotalFields(objectTotalFields+1);
+    }
+
     const rowPrefix = props.isHeader ? "json-builder-row__header" : "json-builder-row__field";
     const cellPrefix = rowPrefix + "__cell";
     const cellTitlePrefix = cellPrefix + "-title";
@@ -85,7 +89,7 @@ export default function JsonBuilderField(props : any){
                                 {
                                     field.type !== FieldType.OBJECT ? 
                                     (<input value={field.value} onChange={(e) => onEditFieldValue(e)}></input>) 
-                                    : <button onClick={onToggleObject}>{ objectOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
+                                    : <button className="json-builder-row-button" onClick={onToggleObject}>{ objectOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
                                 }
                             </div>
                         </>
@@ -96,10 +100,13 @@ export default function JsonBuilderField(props : any){
             {
                 field.type === FieldType.OBJECT ? 
                 <div
+                    className="json-builder-object"
                     style={{
-                        display : objectOpened ? 'block' : 'none'
+                        display : objectOpened ? 'flex' : 'none',
+                        backgroundColor: 'var(--tertiary-color)'
                     }}
                 >
+                    <button className="json-builder-object-button" onClick={onAddField}>ADD NEW FIELD</button>
                     {
                         [...new Array(objectTotalFields)].map(() => {
                             return <JsonBuilderField></JsonBuilderField>
