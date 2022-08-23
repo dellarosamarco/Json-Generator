@@ -14,6 +14,10 @@ export default function JsonBuilderField(props : any){
         type : ''
     } as Field);
 
+    const [objectOpened, setObjectOpened] = useState(false);
+
+    const [objectTotalFields, setObjectTotalFields] = useState(0);
+
     function onEditFieldName(event : any){
         setField({
             ...field,
@@ -33,6 +37,10 @@ export default function JsonBuilderField(props : any){
             ...field,
             type : event.target.value
         });
+    }
+
+    function onToggleObject(){
+        setObjectOpened(!objectOpened);
     }
 
     const rowPrefix = props.isHeader ? "json-builder-row__header" : "json-builder-row__field";
@@ -66,13 +74,19 @@ export default function JsonBuilderField(props : any){
                                     }
                                 </select>
                             </div>
-
+                            
                             <div className={cellPrefix}>
-                                <select></select>
+                                {
+                                    field.type !== FieldType.OBJECT ? (<select></select>) : <></>
+                                }
                             </div>
 
                             <div className={cellPrefix}>
-                                <input value={field.value} onChange={(e) => onEditFieldValue(e)}></input>
+                                {
+                                    field.type !== FieldType.OBJECT ? 
+                                    (<input value={field.value} onChange={(e) => onEditFieldValue(e)}></input>) 
+                                    : <button onClick={onToggleObject}>{ objectOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
+                                }
                             </div>
                         </>
                     )
@@ -80,7 +94,19 @@ export default function JsonBuilderField(props : any){
             </div>
 
             {
-                field.type == FieldType.OBJECT ? <JsonBuilderField></JsonBuilderField> : <></>
+                field.type === FieldType.OBJECT ? 
+                <div
+                    style={{
+                        display : objectOpened ? 'block' : 'none'
+                    }}
+                >
+                    {
+                        [...new Array(objectTotalFields)].map(() => {
+                            return <JsonBuilderField></JsonBuilderField>
+                        })
+                    }
+                </div>
+                : <></>
             }
         </>
     );
