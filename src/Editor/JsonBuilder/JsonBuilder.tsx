@@ -6,9 +6,6 @@ export default function JsonBuilder(){
         <div className="json-builder">
             <JsonBuilderField isHeader={true}></JsonBuilderField>
             <JsonBuilderField></JsonBuilderField>
-            <JsonBuilderField></JsonBuilderField>
-            <JsonBuilderField></JsonBuilderField>
-            <JsonBuilderField></JsonBuilderField>
         </div>
     );
 }
