@@ -4,4 +4,5 @@ export interface Field{
     type? : string;
     generationType? : string;
     value? : string;
+    children? : Field[];
 }

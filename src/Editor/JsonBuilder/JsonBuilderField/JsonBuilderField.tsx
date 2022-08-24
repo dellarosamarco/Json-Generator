@@ -1,58 +1,44 @@
-import { useEffect, useState } from "react";
-import { Field } from "../../interfaces/Field.interface";
-import { Header } from "../../interfaces/Header.interface";
-import { FieldType, FieldTypeInterface, fieldTypes } from "../../models/FieldType.model";
-import FieldsManager from "../../utilities/FieldsManager";
-import { randomString } from "../../utilities/randomString.method";
+import { useState } from "react";
+import { Field } from "../../../interfaces/Field.interface";
+import { Header } from "../../../interfaces/Header.interface";
+import { FieldType, FieldTypeInterface, fieldTypes } from "../../../models/FieldType.model";
+import { randomString } from "../../../utilities/randomString.method";
 
 const headers : Header = {
     titles : ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE']
 }
 
-export default function JsonBuilderField(props : any){
+interface JsonBuilderFieldProps{
+    isHeader? : boolean;
+    field? : Field;
+}
 
-    const [field, setField] = useState({
-        id : randomString(),
-        fieldName : '',
-        value : '',
-        type : '',
-    } as Field);
+export default function JsonBuilderField(props : JsonBuilderFieldProps){
 
-    console.log(field);
+    const [state, forceState] = useState(false);
 
     const [objectOpened, setObjectOpened] = useState(false);
 
-    const [objectTotalFields, setObjectTotalFields] = useState(0);
-
-    useEffect(() => {
-        if(!props.isHeader){
-            FieldsManager.fields.push(field);
-        }
-    }, []);
-
-    useEffect(() => {
-        FieldsManager.editField(field);
-    }, [field])
-
     function onEditFieldName(event : any){
-        setField({
-            ...field,
-            fieldName : event.target.value
-        });
+        props.field!.fieldName = event.target.value;
+        forceState(!state);
     }
 
     function onEditFieldValue(event : any){
-        setField({
-            ...field,
-            value : event.target.value
-        });
+        props.field!.value = event.target.value;
+        forceState(!state);
     }
 
     function onEditFieldType(event : any){
-        setField({
-            ...field,
-            type : event.target.value
-        });
+
+        if(event.target.value === "Object"){
+            if(props.field!.children === undefined){
+                props.field!.children = [];
+            }
+        }
+
+        props.field!.type = event.target.value;
+        forceState(!state);
     }
 
     function onToggleObject(){
@@ -60,7 +46,14 @@ export default function JsonBuilderField(props : any){
     }
 
     function onAddField(){
-        setObjectTotalFields(objectTotalFields+1);
+        props.field!.children?.push({
+            id : randomString(),
+            fieldName : '',
+            value : '',
+            type : '',
+        } as Field);
+
+        forceState(!state);
     }
 
     const rowPrefix = props.isHeader ? "json-builder-row__header" : "json-builder-row__field";
@@ -80,7 +73,7 @@ export default function JsonBuilderField(props : any){
                     }) : (
                         <>
                             <div className={cellPrefix}>
-                                <input value={field.fieldName} onChange={(e) => onEditFieldName(e)}></input>
+                                <input value={props.field!.fieldName} onChange={(e) => onEditFieldName(e)}></input>
                             </div>
 
                             <div className={cellPrefix}>
@@ -97,14 +90,14 @@ export default function JsonBuilderField(props : any){
                             
                             <div className={cellPrefix}>
                                 {
-                                    field.type !== FieldType.OBJECT ? (<select></select>) : <></>
+                                    props.field!.type !== FieldType.OBJECT ? (<select></select>) : <></>
                                 }
                             </div>
 
                             <div className={cellPrefix}>
                                 {
-                                    field.type !== FieldType.OBJECT ? 
-                                    (<input value={field.value} onChange={(e) => onEditFieldValue(e)}></input>) 
+                                    props.field!.type !== FieldType.OBJECT ? 
+                                    (<input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input>) 
                                     : <button className="json-builder-row-button" onClick={onToggleObject}>{ objectOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
                                 }
                             </div>
@@ -114,7 +107,7 @@ export default function JsonBuilderField(props : any){
             </div>
 
             {
-                field.type === FieldType.OBJECT ? 
+                !props.isHeader && props.field!.type === FieldType.OBJECT ? 
                 <div
                     className="json-builder-object"
                     style={{
@@ -124,8 +117,8 @@ export default function JsonBuilderField(props : any){
                 >
                     <button className="json-builder-object-button" onClick={onAddField}>ADD NEW FIELD</button>
                     {
-                        [...new Array(objectTotalFields)].map(() => {
-                            return <JsonBuilderField key={randomString()}></JsonBuilderField>
+                        [...new Array(props.field!.children?.length)].map((x : any, index : number) => {
+                            return <JsonBuilderField field={props.field!.children![index]} key={randomString()}></JsonBuilderField>
                         })
                     }
                 </div>

@@ -1,17 +1,22 @@
 import { useState } from "react";
-import FieldsManager from "../utilities/FieldsManager";
-import { randomString } from "../utilities/randomString.method";
+import { Field } from "../../interfaces/Field.interface";
+import FieldsManager from "../../utilities/FieldsManager";
+import { randomString } from "../../utilities/randomString.method";
 import "./JsonBuilder.scss";
 import JsonBuilderField from "./JsonBuilderField/JsonBuilderField";
 
 export default function JsonBuilder(){
-    const [objectTotalFields, setObjectTotalFields] = useState(0);
+    const [objectTotalFields, setObjectTotalFields] = useState(FieldsManager.fields.length);
 
     function onAddField(){
-        setObjectTotalFields(objectTotalFields+1);
-    }
+        FieldsManager.fields.push({
+            id : randomString(),
+            fieldName : '',
+            value : '',
+            type : '',
+        } as Field);
 
-    function getFields(){
+        setObjectTotalFields(FieldsManager.fields.length);
         console.log(FieldsManager.fields);
     }
     
@@ -26,13 +31,16 @@ export default function JsonBuilder(){
                 }}
             >
                 {
-                    [...new Array(objectTotalFields)].map(() => {
-                        return <JsonBuilderField key={randomString()}></JsonBuilderField>
+                    [...new Array(objectTotalFields)].map((x : any, index : number) => {
+                        return <JsonBuilderField field={FieldsManager.fields[index]} key={randomString()}></JsonBuilderField>
                     })
                 }
                 <button className="json-builder-object-button" onClick={onAddField}>ADD NEW FIELD</button>
             </div>
-            <button onClick={getFields}>ciao</button>
         </div>
     );
+}
+
+function defaultField(defaultField: any) {
+    throw new Error("Function not implemented.");
 }
