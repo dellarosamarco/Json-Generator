@@ -1,22 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Field } from "../../interfaces/Field.interface";
 import { Header } from "../../interfaces/Header.interface";
 import { FieldType, FieldTypeInterface, fieldTypes } from "../../models/FieldType.model";
+import FieldsManager from "../../utilities/FieldsManager";
+import { randomString } from "../../utilities/randomString.method";
 
 const headers : Header = {
     titles : ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE']
 }
 
 export default function JsonBuilderField(props : any){
+
     const [field, setField] = useState({
+        id : randomString(),
         fieldName : '',
         value : '',
-        type : ''
+        type : '',
     } as Field);
+
+    console.log(field);
 
     const [objectOpened, setObjectOpened] = useState(false);
 
     const [objectTotalFields, setObjectTotalFields] = useState(0);
+
+    useEffect(() => {
+        if(!props.isHeader){
+            FieldsManager.fields.push(field);
+        }
+    }, []);
+
+    useEffect(() => {
+        FieldsManager.editField(field);
+    }, [field])
 
     function onEditFieldName(event : any){
         setField({
@@ -109,7 +125,7 @@ export default function JsonBuilderField(props : any){
                     <button className="json-builder-object-button" onClick={onAddField}>ADD NEW FIELD</button>
                     {
                         [...new Array(objectTotalFields)].map(() => {
-                            return <JsonBuilderField></JsonBuilderField>
+                            return <JsonBuilderField key={randomString()}></JsonBuilderField>
                         })
                     }
                 </div>
