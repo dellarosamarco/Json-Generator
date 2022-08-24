@@ -17,7 +17,6 @@ export default function JsonBuilder(){
         } as Field);
 
         setObjectTotalFields(FieldsManager.fields.length);
-        console.log(FieldsManager.fields);
     }
     
     return (

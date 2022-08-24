@@ -1,8 +1,21 @@
 import JsonBuilder from './JsonBuilder/JsonBuilder';
 import "./Editor.scss";
+import JsonResult from './JsonResult/JsonResult';
+import { useState } from 'react';
 
 export default function Editor(){
+
+    const [state, forceState] = useState(false);
+
+    function generateJson(){
+        forceState(!state);
+    }
+
     return (
-        <JsonBuilder></JsonBuilder>
+        <div className="editor">
+            <JsonBuilder></JsonBuilder>
+            <button onClick={generateJson}>Generate</button>
+            <JsonResult></JsonResult>
+        </div>
     );
 }
