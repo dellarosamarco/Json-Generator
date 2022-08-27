@@ -2,4 +2,10 @@
     width:500px;
     height:600px;
     background-color: var(--secondary-color);
+    padding:10px;
+
+    &-json{
+        color:white;
+        margin:0px;
+    }
 }

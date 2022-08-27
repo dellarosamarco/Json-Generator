@@ -51,6 +51,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             fieldName : '',
             value : '',
             type : '',
+            parentId : props.field?.id
         } as Field);
 
         forceState(!state);
@@ -77,7 +78,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
                             </div>
 
                             <div className={cellPrefix}>
-                                <select onChange={(e) => onEditFieldType(e)}>
+                                <select onChange={(e) => onEditFieldType(e)} defaultValue={props.field?.type}>
                                     {
                                         fieldTypes.map((fieldType : FieldTypeInterface) => {
                                             return (
