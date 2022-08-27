@@ -1,7 +1,8 @@
 import { Field } from "../interfaces/Field.interface";
+import { fakeData } from "./fakeData";
 
 export default class FieldsManager{
-    static fields : Field[] = [];
+    static fields : Field[] = fakeData;
     static composedJson = {};
     static jsonMap : Field[] = [];
 

@@ -5,7 +5,7 @@ export const fakeData : Field[] = [
         id: 'LEVEL_1A', 
         fieldName: 'LEVEL_1A', 
         value: 'b1', 
-        type: 'Object',
+        type: 'Array',
         path: [],
         children : [
             {
@@ -58,7 +58,7 @@ export const fakeData : Field[] = [
         id: 'LEVEL_1B', 
         fieldName: 'LEVEL_1B', 
         value: 'b1', 
-        type: 'Object',
+        type: 'Array',
         path: [],
         children : [
             {

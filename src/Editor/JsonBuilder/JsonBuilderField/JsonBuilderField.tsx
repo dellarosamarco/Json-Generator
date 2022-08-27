@@ -19,6 +19,10 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
 
     const [objectOpened, setObjectOpened] = useState(false);
 
+    const isArrayOrObject = () => {
+        return (props.field!.type === FieldType.ARRAY || props.field!.type === FieldType.OBJECT);
+    }
+
     function onEditFieldName(event : any){
         props.field!.fieldName = event.target.value;
         forceState(!state);
@@ -31,7 +35,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
 
     function onEditFieldType(event : any){
 
-        if(event.target.value === "Object"){
+        if(event.target.value === "Array" || event.target.value === "Object"){
             if(props.field!.children === undefined){
                 props.field!.children = [];
             }
@@ -91,13 +95,13 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
                             
                             <div className={cellPrefix}>
                                 {
-                                    props.field!.type !== FieldType.OBJECT ? (<select></select>) : <></>
+                                    (!isArrayOrObject()) ? (<select></select>) : <></>
                                 }
                             </div>
 
                             <div className={cellPrefix}>
                                 {
-                                    props.field!.type !== FieldType.OBJECT ? 
+                                    (!isArrayOrObject()) ? 
                                     (<input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input>) 
                                     : <button className="json-builder-row-button" onClick={onToggleObject}>{ objectOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
                                 }
@@ -108,7 +112,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             </div>
 
             {
-                !props.isHeader && props.field!.type === FieldType.OBJECT ? 
+                !props.isHeader && isArrayOrObject() ? 
                 <div
                     className="json-builder-object"
                     style={{

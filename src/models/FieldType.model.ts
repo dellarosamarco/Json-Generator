@@ -2,6 +2,7 @@ export enum FieldType{
     STRING = "String",
     NUMBER = "Number",
     BOOLEAN = "Boolean",
+    ARRAY = "Array",
     OBJECT = "Object"
 }
 
@@ -24,7 +25,11 @@ export const fieldTypes : FieldTypeInterface[] = [
         fieldName : 'Boolean'
     },    
     {
+        fieldType : FieldType.ARRAY,
+        fieldName : 'Array'
+    },
+    {
         fieldType : FieldType.OBJECT,
         fieldName : 'Object'
-    },
+    }
 ]
