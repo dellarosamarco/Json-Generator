@@ -89,3 +89,33 @@ export const fakeData : Field[] = [
         ]
     }
 ];
+
+export const fakeData2 : Field[] = [
+    {
+        id: 'A', 
+        fieldName: 'A', 
+        value: 'A', 
+        type: FieldType.ARRAY,
+        path: [],
+        children : [
+            {
+                id : 'AA',
+                parentId : 'A',
+                fieldName : 'AA',
+                value : 'AA',
+                type: FieldType.ARRAY,
+                path : [],
+                children : [
+                    {
+                        id: 'AAA', 
+                        parentId : 'AA',
+                        fieldName: 'AAA', 
+                        value: 'AAA', 
+                        type: FieldType.STRING,
+                        path: []
+                    }
+                ]
+            }
+        ]
+    }
+];

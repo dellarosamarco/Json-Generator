@@ -1,9 +1,9 @@
 import { Field } from "../interfaces/Field.interface";
 import { FieldType } from "../models/FieldType.model";
-import { fakeData } from "./fakeData";
+import { fakeData, fakeData2 } from "./fakeData";
 
 export default class FieldsManager{
-    static fields : Field[] = [];
+    static fields : Field[] = fakeData;
     static composedJson = {};
     static jsonMap : Field[] = [];
     static repeat : number = 1;
@@ -42,7 +42,7 @@ export default class FieldsManager{
         return {};
     }
 
-    static getParent(parentId : string) : Field{
+    static getParentById(parentId : string) : Field{
         return this.jsonMap.filter((field : Field) => {
             return field.id === parentId;
         })[0];
@@ -60,7 +60,7 @@ export default class FieldsManager{
         
         for(let n=0; n<path.length; n++){
             if(n == path.length - 1){
-                if(this.getParent(field.parentId!).type === FieldType.ARRAY){
+                if(this.getParentById(field.parentId!).type === FieldType.ARRAY){
                     tmpPartialJson.push(field.children?.length! > 0 ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : field.value});
                 }
                 else{
@@ -70,8 +70,8 @@ export default class FieldsManager{
             else if(n === 0){
                 tmpPartialJson = paritalJson[path[n]];
             }
-            else{                
-                if(this.getParent(field.parentId!).type === FieldType.ARRAY){
+            else{            
+                if(Array.isArray(tmpPartialJson)){
                     tmpPartialJson.forEach((obj : any) => {
                         const keys = Object.keys(obj);
                         if(keys.includes(path[n])){

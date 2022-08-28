@@ -15,6 +15,8 @@ export default function JsonBuilder(){
             fieldName : '',
             value : '',
             type : FieldType.STRING,
+            path : [],
+            children : []
         } as Field);
 
         setObjectTotalFields(FieldsManager.fields.length);
@@ -39,8 +41,4 @@ export default function JsonBuilder(){
             </div>
         </div>
     );
-}
-
-function defaultField(defaultField: any) {
-    throw new Error("Function not implemented.");
 }

@@ -54,7 +54,9 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             fieldName : '',
             value : '',
             type : FieldType.STRING,
-            parentId : props.field?.id
+            parentId : props.field?.id,
+            path : [],
+            children : []
         } as Field);
 
         forceState(!state);
