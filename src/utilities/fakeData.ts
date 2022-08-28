@@ -1,11 +1,12 @@
 import { Field } from "../interfaces/Field.interface";
+import { FieldType } from "../models/FieldType.model";
 
 export const fakeData : Field[] = [
     {
         id: 'LEVEL_1A', 
         fieldName: 'LEVEL_1A', 
         value: 'b1', 
-        type: 'Array',
+        type: FieldType.ARRAY,
         path: [],
         children : [
             {
@@ -13,7 +14,7 @@ export const fakeData : Field[] = [
                 parentId : 'LEVEL_1A',
                 fieldName: 'LEVEL_2A', 
                 value: '2A', 
-                type: '',
+                type: FieldType.ARRAY,
                 path: [],
                 children : [
                     {
@@ -21,7 +22,7 @@ export const fakeData : Field[] = [
                         parentId : 'LEVEL_1A',
                         fieldName: 'LEVEL_3A', 
                         value: '3A', 
-                        type: '',
+                        type: FieldType.ARRAY,
                         path: [],
                         children : [
                             {
@@ -29,7 +30,7 @@ export const fakeData : Field[] = [
                                 parentId : 'LEVEL_1A',
                                 fieldName: 'LEVEL_4A', 
                                 value: '4A', 
-                                type: '',
+                                type: FieldType.STRING,
                                 path: [],
                             }
                         ]
@@ -41,7 +42,7 @@ export const fakeData : Field[] = [
                 parentId : 'LEVEL_1A',
                 fieldName: 'LEVEL_2B', 
                 value: '2B', 
-                type: '',
+                type: FieldType.STRING,
                 path: [],
             },                
             {
@@ -49,7 +50,7 @@ export const fakeData : Field[] = [
                 parentId : 'LEVEL_1A',
                 fieldName: 'LEVEL_2C', 
                 value: '2C', 
-                type: '',
+                type: FieldType.STRING,
                 path: [],
             }
         ]
@@ -58,7 +59,7 @@ export const fakeData : Field[] = [
         id: 'LEVEL_1B', 
         fieldName: 'LEVEL_1B', 
         value: 'b1', 
-        type: 'Array',
+        type: FieldType.ARRAY,
         path: [],
         children : [
             {
@@ -66,7 +67,7 @@ export const fakeData : Field[] = [
                 parentId : 'LEVEL_1A',
                 fieldName: 'LEVEL_2A', 
                 value: '2A 2', 
-                type: '',
+                type: FieldType.STRING,
                 path: [],
             },                
             {
@@ -74,7 +75,7 @@ export const fakeData : Field[] = [
                 parentId : 'LEVEL_1A',
                 fieldName: 'LEVEL_2B', 
                 value: '2B 2', 
-                type: '',
+                type: FieldType.STRING,
                 path: [],
             },                
             {
@@ -82,7 +83,7 @@ export const fakeData : Field[] = [
                 parentId : 'LEVEL_1A',
                 fieldName: 'LEVEL_2C', 
                 value: '2C 2', 
-                type: '',
+                type: FieldType.STRING,
                 path: [],
             }
         ]

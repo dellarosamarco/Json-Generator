@@ -16,8 +16,7 @@ export default function Editor(){
     return (
         <div className="editor">
             <JsonBuilder></JsonBuilder>
-            <button onClick={generateJson}>Generate</button>
-            <JsonResult></JsonResult>
+            <JsonResult generateJson={generateJson}></JsonResult>
         </div>
     );
 }

@@ -2,10 +2,31 @@
     width:500px;
     height:600px;
     background-color: var(--secondary-color);
-    padding:10px;
+
+    &__header{
+        height:50px;
+        background-color: var(--tertiary-color);
+        padding:7.5px;
+        box-sizing: border-box;
+
+        button{
+            height:100%;
+            width: 150px;
+            background-color: var(--primary-color);
+            color:white;
+            cursor: pointer;
+            border: 1px solid var(--border-primary-color);
+            border-radius:5px;
+        }
+
+        button:hover{
+            background-color: var(--secondary-color);
+        }
+    }
 
     &-json{
         color:white;
         margin:0px;
+        padding:10px;
     }
 }

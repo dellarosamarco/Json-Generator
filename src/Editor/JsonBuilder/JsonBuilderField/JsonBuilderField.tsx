@@ -54,7 +54,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             id : randomString(),
             fieldName : '',
             value : '',
-            type : '',
+            type : FieldType.STRING,
             parentId : props.field?.id
         } as Field);
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Field } from "../../interfaces/Field.interface";
+import { FieldType } from "../../models/FieldType.model";
 import FieldsManager from "../../utilities/FieldsManager";
 import { randomString } from "../../utilities/randomString.method";
 import "./JsonBuilder.scss";
@@ -13,7 +14,7 @@ export default function JsonBuilder(){
             id : randomString(),
             fieldName : '',
             value : '',
-            type : '',
+            type : FieldType.STRING,
         } as Field);
 
         setObjectTotalFields(FieldsManager.fields.length);
