@@ -9,4 +9,5 @@ export interface Field{
     value? : string;
     children? : Field[];
     path: string[];
+    fieldOpened? : boolean;
 }

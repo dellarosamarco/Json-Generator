@@ -17,8 +17,6 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
 
     const [state, forceState] = useState(false);
 
-    const [objectOpened, setObjectOpened] = useState(false);
-
     const isArrayOrObject = () => {
         return (props.field!.type === FieldType.ARRAY || props.field!.type === FieldType.OBJECT);
     }
@@ -46,7 +44,8 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
     }
 
     function onToggleObject(){
-        setObjectOpened(!objectOpened);
+        props.field!.fieldOpened = props.field?.fieldOpened ? false : true;
+        forceState(!state);
     }
 
     function onAddField(){
@@ -103,7 +102,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
                                 {
                                     (!isArrayOrObject()) ? 
                                     (<input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input>) 
-                                    : <button className="json-builder-row-button" onClick={onToggleObject}>{ objectOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
+                                    : <button className="json-builder-row-button" onClick={onToggleObject}>{ props.field?.fieldOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
                                 }
                             </div>
                         </>
@@ -116,7 +115,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
                 <div
                     className="json-builder-object"
                     style={{
-                        display : objectOpened ? 'flex' : 'none',
+                        display : props.field?.fieldOpened ? 'flex' : 'none',
                         backgroundColor: 'var(--tertiary-color)'
                     }}
                 >
