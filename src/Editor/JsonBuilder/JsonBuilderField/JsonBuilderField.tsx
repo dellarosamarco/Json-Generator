@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Field } from "../../../interfaces/Field.interface";
 import { Header } from "../../../interfaces/Header.interface";
 import { FieldType, FieldTypeInterface, fieldTypes } from "../../../utilities/FieldType.model";
+import { GenerationTypeInterface, getGenerationType } from "../../../utilities/generationType.utilities";
 import { randomString } from "../../../utilities/randomString.method";
 
 const headers : Header = {
@@ -96,7 +97,17 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
                             
                             <div className={cellPrefix}>
                                 {
-                                    (!isArrayOrObject()) ? (<select></select>) : <></>
+                                    (!isArrayOrObject()) ? (
+                                        <select>
+                                            {
+                                                getGenerationType(props.field?.type!).map((generationTypeInterface : GenerationTypeInterface) => {
+                                                    return (
+                                                        <option key={generationTypeInterface.name} value={generationTypeInterface.type}>{generationTypeInterface.name}</option>
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                    ) : <></>
                                 }
                             </div>
 
