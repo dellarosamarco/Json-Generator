@@ -6,24 +6,31 @@ export default class FieldsManager{
     static fields : Field[] = [];
     static composedJson = {};
     static jsonMap : Field[] = [];
+    static repeat : number = 1;
 
     static get json(){
         this.jsonMap = [];
-        let json : any = {};
-        let depth = 1;
+        const json : any = [];
 
         if(FieldsManager.fields.length > 0){
             this.setRecursivePath(FieldsManager.fields, []);
         }
 
-        while(depth <= this.jsonMap.length){
-            this.jsonMap.filter((field : Field) => {
-                return field.path.length === depth;
-            }).forEach((field : Field) => {
-                json = this.setJsonValueByPath(json, field.path, field);
-            });
+        for(let n=0;n<this.repeat;n++){
+            let partialJson : any = {};
+            let depth = 1;
 
-            depth++;
+            while(depth <= this.jsonMap.length){
+                this.jsonMap.filter((field : Field) => {
+                    return field.path.length === depth;
+                }).forEach((field : Field) => {
+                    partialJson = this.setJsonValueByPath(partialJson, field.path, field);
+                });
+    
+                depth++;
+            }
+
+            json.push(partialJson);
         }
 
         return json;

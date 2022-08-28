@@ -1,13 +1,16 @@
 .json-result{
-    width:500px;
-    height:600px;
+    width:30%;
+    height:100%;
     background-color: var(--secondary-color);
+    border-left: 1px solid var(--border-primary-color);
 
     &__header{
         height:50px;
         background-color: var(--tertiary-color);
         padding:7.5px;
         box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
 
         button{
             height:100%;
@@ -22,11 +25,38 @@
         button:hover{
             background-color: var(--secondary-color);
         }
+
+        &-repeat-container{
+            display: flex;
+            align-items: center;
+            gap:10px;
+
+            h1{
+                font-size:15px;
+                color:white;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            input{
+                background-color: var(--primary-color);
+                border:1px solid var(--border-primary-color);
+                width:45px;
+                height:70%;
+                outline: none;
+                padding-left:5px;
+                color:white;
+            }
+        }
     }
 
-    &-json{
-        color:white;
-        margin:0px;
-        padding:10px;
+    &__body{
+        overflow: auto;
+        max-height: calc(100% - 50px);
+
+        pre{
+            color:white;
+            margin:0px;
+            padding:10px;
+        }
     }
 }

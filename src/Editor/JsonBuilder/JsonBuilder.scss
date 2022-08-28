@@ -1,6 +1,6 @@
 .json-builder{
-    width:max-content;
-    height:600px;
+    width:70%;
+    height:100%;
     background-color: var(--secondary-color);
 
     &-row{
@@ -22,7 +22,7 @@
 
         &__header, &__field{
             &__cell{
-                width:250px;
+                width:100%;
                 display: flex;
                 align-items: center;
                 padding:15px;
@@ -48,6 +48,7 @@
 
         &__field{
             height:65px;
+            width: 100%;
 
             &__cell{
 
