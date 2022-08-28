@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Field } from "../../../interfaces/Field.interface";
 import { Header } from "../../../interfaces/Header.interface";
-import { FieldType, FieldTypeInterface, fieldTypes } from "../../../models/FieldType.model";
+import { FieldType, FieldTypeInterface, fieldTypes } from "../../../utilities/FieldType.model";
 import { randomString } from "../../../utilities/randomString.method";
 
 const headers : Header = {

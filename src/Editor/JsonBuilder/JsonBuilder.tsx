@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Field } from "../../interfaces/Field.interface";
-import { FieldType } from "../../models/FieldType.model";
+import { FieldType } from "../../utilities/FieldType.model";
 import FieldsManager from "../../utilities/FieldsManager";
 import { randomString } from "../../utilities/randomString.method";
 import "./JsonBuilder.scss";

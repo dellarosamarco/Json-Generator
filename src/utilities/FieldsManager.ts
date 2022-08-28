@@ -1,9 +1,9 @@
 import { Field } from "../interfaces/Field.interface";
-import { FieldType } from "../models/FieldType.model";
+import { FieldType } from "./FieldType.model";
 import { fakeData, fakeData2 } from "./fakeData";
 
 export default class FieldsManager{
-    static fields : Field[] = fakeData;
+    static fields : Field[] = [];
     static composedJson = {};
     static jsonMap : Field[] = [];
     static repeat : number = 1;
@@ -59,7 +59,7 @@ export default class FieldsManager{
         let tmpPartialJson : any;
         
         for(let n=0; n<path.length; n++){
-            if(n == path.length - 1){
+            if(n === path.length - 1){
                 if(this.getParentById(field.parentId!).type === FieldType.ARRAY){
                     tmpPartialJson.push(field.children?.length! > 0 ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : field.value});
                 }

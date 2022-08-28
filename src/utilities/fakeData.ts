@@ -1,5 +1,5 @@
 import { Field } from "../interfaces/Field.interface";
-import { FieldType } from "../models/FieldType.model";
+import { FieldType } from "./FieldType.model";
 
 export const fakeData : Field[] = [
     {

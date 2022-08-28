@@ -1,4 +1,4 @@
-import { FieldType } from "../models/FieldType.model";
+import { FieldType } from "../utilities/FieldType.model";
 
 export interface Field{
     id? : string;
