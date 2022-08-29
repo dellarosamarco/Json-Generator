@@ -67,80 +67,114 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
     const cellPrefix = rowPrefix + "__cell";
     const cellTitlePrefix = cellPrefix + "-title";
 
+    function renderHeader(){
+        return (
+            headers.titles.map((title : string) => {
+                return (
+                    <div className={cellPrefix} key={title}>
+                        <h1 className={cellTitlePrefix}>{title}</h1>
+                    </div>
+                )
+            })
+        )
+    }
+
+    function renderRows(){
+
+        function renderFieldNameCell(){
+            return (
+                <div className={cellPrefix}>
+                    <input value={props.field!.fieldName} onChange={(e) => onEditFieldName(e)}></input>
+                </div>
+            );
+        }
+
+        function renderFieldTypeCell(){
+            return (
+                <div className={cellPrefix}>
+                    <select onChange={(e) => onEditFieldType(e)} defaultValue={props.field?.type}>
+                        {
+                            fieldTypes.map((fieldType : FieldTypeInterface) => {
+                                return (
+                                    <option key={fieldType.fieldType} value={fieldType.fieldType}>{fieldType.fieldName}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
+            );
+        }
+
+        function renderFieldGenerationTypeCell(){
+            return(
+                <div className={cellPrefix}>
+                    {
+                        (!isArrayOrObject()) ? (
+                            <select>
+                                {
+                                    getGenerationType(props.field?.type!).map((generationTypeInterface : GenerationTypeInterface) => {
+                                        return (
+                                            <option key={generationTypeInterface.name} value={generationTypeInterface.type}>{generationTypeInterface.name}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        ) : <></>
+                    }
+                </div>
+            );
+        }
+
+        function renderFieldValue(){
+            return(
+                <div className={cellPrefix}>
+                    {
+                        (!isArrayOrObject()) ? 
+                        (<input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input>) 
+                        : <button className="json-builder-row-button" onClick={onToggleObject}>{ props.field?.fieldOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
+                    }
+                </div>
+            );
+        }
+
+        return (
+            (
+                <>
+                    {renderFieldNameCell()}
+                    {renderFieldTypeCell()}
+                    {renderFieldGenerationTypeCell()}
+                    {renderFieldValue()}
+                </>
+            )
+        )
+    }
+
+    function renderChildren(){
+        return(
+            <div
+                className="json-builder-object"
+                style={{
+                    display : props.field?.fieldOpened ? 'flex' : 'none',
+                    backgroundColor: 'var(--tertiary-color)'
+                }}
+            >
+                <button className="json-builder-object-button" onClick={onAddField}>ADD NEW FIELD</button>
+                {
+                    [...new Array(props.field!.children?.length)].map((x : any, index : number) => {
+                        return <JsonBuilderField field={props.field!.children![index]} key={randomString()}></JsonBuilderField>
+                    })
+                }
+            </div>
+        );
+    }
+
     return (
         <>
             <div className={"json-builder-row " + rowPrefix}>
-                {          
-                    props.isHeader ? headers.titles.map((title : string) => {
-                        return (
-                            <div className={cellPrefix} key={title}>
-                                <h1 className={cellTitlePrefix}>{title}</h1>
-                            </div>
-                        )
-                    }) : (
-                        <>
-                            <div className={cellPrefix}>
-                                <input value={props.field!.fieldName} onChange={(e) => onEditFieldName(e)}></input>
-                            </div>
-
-                            <div className={cellPrefix}>
-                                <select onChange={(e) => onEditFieldType(e)} defaultValue={props.field?.type}>
-                                    {
-                                        fieldTypes.map((fieldType : FieldTypeInterface) => {
-                                            return (
-                                                <option key={fieldType.fieldType} value={fieldType.fieldType}>{fieldType.fieldName}</option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            
-                            <div className={cellPrefix}>
-                                {
-                                    (!isArrayOrObject()) ? (
-                                        <select>
-                                            {
-                                                getGenerationType(props.field?.type!).map((generationTypeInterface : GenerationTypeInterface) => {
-                                                    return (
-                                                        <option key={generationTypeInterface.name} value={generationTypeInterface.type}>{generationTypeInterface.name}</option>
-                                                    )
-                                                })
-                                            }
-                                        </select>
-                                    ) : <></>
-                                }
-                            </div>
-
-                            <div className={cellPrefix}>
-                                {
-                                    (!isArrayOrObject()) ? 
-                                    (<input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input>) 
-                                    : <button className="json-builder-row-button" onClick={onToggleObject}>{ props.field?.fieldOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
-                                }
-                            </div>
-                        </>
-                    )
-                }
+                { props.isHeader ? renderHeader() : renderRows() }
             </div>
 
-            {
-                !props.isHeader && isArrayOrObject() ? 
-                <div
-                    className="json-builder-object"
-                    style={{
-                        display : props.field?.fieldOpened ? 'flex' : 'none',
-                        backgroundColor: 'var(--tertiary-color)'
-                    }}
-                >
-                    <button className="json-builder-object-button" onClick={onAddField}>ADD NEW FIELD</button>
-                    {
-                        [...new Array(props.field!.children?.length)].map((x : any, index : number) => {
-                            return <JsonBuilderField field={props.field!.children![index]} key={randomString()}></JsonBuilderField>
-                        })
-                    }
-                </div>
-                : <></>
-            }
+            { !props.isHeader && isArrayOrObject() ? renderChildren() : <></> }
         </>
     );
 }
