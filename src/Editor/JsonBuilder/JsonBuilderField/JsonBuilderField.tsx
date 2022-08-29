@@ -1,13 +1,8 @@
 import { useState } from "react";
 import { Field } from "../../../interfaces/Field.interface";
-import { Header } from "../../../interfaces/Header.interface";
 import { FieldType, FieldTypeInterface, fieldTypes } from "../../../utilities/FieldType.model";
 import { GenerationType, GenerationTypeInterface, getGenerationType } from "../../../utilities/generationType.utilities";
 import { randomString } from "../../../utilities/randomString.method";
-
-const headers : Header = {
-    titles : ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE']
-}
 
 interface JsonBuilderFieldProps{
     isHeader? : boolean;
@@ -75,7 +70,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
 
     function renderHeader(){
         return (
-            headers.titles.map((title : string) => {
+            ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE'].map((title : string) => {
                 return (
                     <div className={cellPrefix} key={title}>
                         <h1 className={cellTitlePrefix}>{title}</h1>
