@@ -5,6 +5,7 @@ import FieldsManager from "../../utilities/FieldsManager";
 import { randomString } from "../../utilities/randomString.method";
 import "./JsonBuilder.scss";
 import JsonBuilderField from "./JsonBuilderField/JsonBuilderField";
+import { GenerationType } from "../../utilities/generationType.utilities";
 
 export default function JsonBuilder(){
     const [objectTotalFields, setObjectTotalFields] = useState(FieldsManager.fields.length);
@@ -15,6 +16,7 @@ export default function JsonBuilder(){
             fieldName : '',
             value : '',
             type : FieldType.STRING,
+            generationType : GenerationType.CUSTOM_VALUE,
             path : [],
             children : []
         } as Field);

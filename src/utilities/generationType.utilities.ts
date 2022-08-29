@@ -1,11 +1,11 @@
 import { FieldType } from "./FieldType.model";
 
 export enum GenerationType{
-    CUSTOM_VALUE,
-    RANDOM_NAME,
-    RANDOM_LAST_NAME,
-    RANDOM_AGE,
-    RANDOM_BOOLEAN
+    CUSTOM_VALUE = "Custom value",
+    RANDOM_NAME = "Random name",
+    RANDOM_LAST_NAME = "Random last name",
+    RANDOM_NUMBER = "Random number",
+    RANDOM_BOOLEAN = "Random boolean",
 }
 
 export interface GenerationTypeInterface{
@@ -15,37 +15,37 @@ export interface GenerationTypeInterface{
 
 export const stringGenerationTypes : GenerationTypeInterface[] = [
     {
-        "name" : "Custom value",
+        "name" : GenerationType.CUSTOM_VALUE.toString(),
         "type" : GenerationType.CUSTOM_VALUE
     },
     {
-        "name" : "Random name",
+        "name" : GenerationType.RANDOM_NAME.toString(),
         "type" : GenerationType.RANDOM_NAME
     },
     {
-        "name" : "Random last name",
+        "name" : GenerationType.RANDOM_LAST_NAME.toString(),
         "type" : GenerationType.RANDOM_LAST_NAME
     },
 ];
 
 export const numberGenerationTypes : GenerationTypeInterface[] = [
     {
-        "name" : "Custom value",
+        "name" : GenerationType.CUSTOM_VALUE.toString(),
         "type" : GenerationType.CUSTOM_VALUE
     },
     {
-        "name" : "Random age",
-        "type" : GenerationType.RANDOM_AGE
+        "name" : GenerationType.RANDOM_NUMBER.toString(),
+        "type" : GenerationType.RANDOM_NUMBER
     }
 ];
 
 export const booleanGenerationTypes : GenerationTypeInterface[] = [
     {
-        "name" : "Custom value",
+        "name" : GenerationType.CUSTOM_VALUE.toString(),
         "type" : GenerationType.CUSTOM_VALUE
     },
     {
-        "name" : "Random boolean",
+        "name" : GenerationType.RANDOM_BOOLEAN.toString(),
         "type" : GenerationType.RANDOM_BOOLEAN
     }
 ];

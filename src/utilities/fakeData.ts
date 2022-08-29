@@ -1,5 +1,6 @@
 import { Field } from "../interfaces/Field.interface";
 import { FieldType } from "./FieldType.model";
+import { GenerationType } from "./generationType.utilities";
 
 export const fakeData : Field[] = [
     {
@@ -7,6 +8,7 @@ export const fakeData : Field[] = [
         fieldName: 'LEVEL_1A', 
         value: 'b1', 
         type: FieldType.ARRAY,
+        generationType : GenerationType.CUSTOM_VALUE,
         path: [],
         children : [
             {
@@ -15,6 +17,7 @@ export const fakeData : Field[] = [
                 fieldName: 'LEVEL_2A', 
                 value: '2A', 
                 type: FieldType.ARRAY,
+                generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
                 children : [
                     {
@@ -23,6 +26,7 @@ export const fakeData : Field[] = [
                         fieldName: 'LEVEL_3A', 
                         value: '3A', 
                         type: FieldType.ARRAY,
+                        generationType : GenerationType.CUSTOM_VALUE,
                         path: [],
                         children : [
                             {
@@ -31,6 +35,7 @@ export const fakeData : Field[] = [
                                 fieldName: 'LEVEL_4A', 
                                 value: '4A', 
                                 type: FieldType.STRING,
+                                generationType : GenerationType.CUSTOM_VALUE,
                                 path: [],
                             }
                         ]
@@ -43,6 +48,7 @@ export const fakeData : Field[] = [
                 fieldName: 'LEVEL_2B', 
                 value: '2B', 
                 type: FieldType.STRING,
+                generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
             },                
             {
@@ -51,6 +57,7 @@ export const fakeData : Field[] = [
                 fieldName: 'LEVEL_2C', 
                 value: '2C', 
                 type: FieldType.STRING,
+                generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
             }
         ]
@@ -60,6 +67,7 @@ export const fakeData : Field[] = [
         fieldName: 'LEVEL_1B', 
         value: 'b1', 
         type: FieldType.ARRAY,
+        generationType : GenerationType.CUSTOM_VALUE,
         path: [],
         children : [
             {
@@ -68,6 +76,7 @@ export const fakeData : Field[] = [
                 fieldName: 'LEVEL_2A', 
                 value: '2A 2', 
                 type: FieldType.STRING,
+                generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
             },                
             {
@@ -76,6 +85,7 @@ export const fakeData : Field[] = [
                 fieldName: 'LEVEL_2B', 
                 value: '2B 2', 
                 type: FieldType.STRING,
+                generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
             },                
             {
@@ -84,6 +94,7 @@ export const fakeData : Field[] = [
                 fieldName: 'LEVEL_2C', 
                 value: '2C 2', 
                 type: FieldType.STRING,
+                generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
             }
         ]
@@ -96,6 +107,7 @@ export const fakeData2 : Field[] = [
         fieldName: 'A', 
         value: 'A', 
         type: FieldType.ARRAY,
+        generationType : GenerationType.CUSTOM_VALUE,
         path: [],
         children : [
             {
@@ -104,6 +116,7 @@ export const fakeData2 : Field[] = [
                 fieldName : 'AA',
                 value : 'AA',
                 type: FieldType.ARRAY,
+                generationType : GenerationType.CUSTOM_VALUE,
                 path : [],
                 children : [
                     {
@@ -112,6 +125,7 @@ export const fakeData2 : Field[] = [
                         fieldName: 'AAA', 
                         value: 'AAA', 
                         type: FieldType.STRING,
+                        generationType : GenerationType.CUSTOM_VALUE,
                         path: []
                     }
                 ]

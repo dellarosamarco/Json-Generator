@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Field } from "../../../interfaces/Field.interface";
 import { Header } from "../../../interfaces/Header.interface";
 import { FieldType, FieldTypeInterface, fieldTypes } from "../../../utilities/FieldType.model";
-import { GenerationTypeInterface, getGenerationType } from "../../../utilities/generationType.utilities";
+import { GenerationType, GenerationTypeInterface, getGenerationType } from "../../../utilities/generationType.utilities";
 import { randomString } from "../../../utilities/randomString.method";
 
 const headers : Header = {
@@ -44,6 +44,11 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
         forceState(!state);
     }
 
+    function onEditFieldGenerationType(event : any){
+        props.field!.generationType = event.target.value;
+        forceState(!state);
+    }
+
     function onToggleObject(){
         props.field!.fieldOpened = props.field?.fieldOpened ? false : true;
         forceState(!state);
@@ -56,6 +61,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             value : '',
             type : FieldType.STRING,
             parentId : props.field?.id,
+            generationType : GenerationType.CUSTOM_VALUE,
             path : [],
             children : []
         } as Field);
@@ -110,7 +116,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
                 <div className={cellPrefix}>
                     {
                         (!isArrayOrObject()) ? (
-                            <select>
+                            <select onChange={(e) => onEditFieldGenerationType(e)} defaultValue={props.field?.generationType}>
                                 {
                                     getGenerationType(props.field?.type!).map((generationTypeInterface : GenerationTypeInterface) => {
                                         return (
@@ -126,11 +132,17 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
         }
 
         function renderFieldValue(){
+            function render(){
+                return props.field?.generationType === GenerationType.CUSTOM_VALUE ? 
+                <input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input> : 
+                <></>
+            }
+
             return(
                 <div className={cellPrefix}>
                     {
                         (!isArrayOrObject()) ? 
-                        (<input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input>) 
+                        (render()) 
                         : <button className="json-builder-row-button" onClick={onToggleObject}>{ props.field?.fieldOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
                     }
                 </div>

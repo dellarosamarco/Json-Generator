@@ -1,6 +1,7 @@
 import { Field } from "../interfaces/Field.interface";
 import { FieldType } from "./FieldType.model";
 import { fakeData, fakeData2 } from "./fakeData";
+import { getFieldValue } from "./value/value.utilities";
 
 export default class FieldsManager{
     static fields : Field[] = [];
@@ -52,7 +53,7 @@ export default class FieldsManager{
         let paritalJson = json;
 
         if(path.length === 1){
-            paritalJson[path[0]] = field.children?.length! > 0 ? this.getChildrenType(field.type!) : field.value;
+            paritalJson[path[0]] = field.children?.length! > 0 ? this.getChildrenType(field.type!) : getFieldValue(field);
             return paritalJson;
         }
 
@@ -61,10 +62,10 @@ export default class FieldsManager{
         for(let n=0; n<path.length; n++){
             if(n === path.length - 1){
                 if(this.getParentById(field.parentId!).type === FieldType.ARRAY){
-                    tmpPartialJson.push(field.children?.length! > 0 ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : field.value});
+                    tmpPartialJson.push(field.children?.length! > 0 ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : getFieldValue(field)});
                 }
                 else{
-                    tmpPartialJson[path[n]] = field.children?.length! > 0 ? this.getChildrenType(field.type!) : field.value;
+                    tmpPartialJson[path[n]] = field.children?.length! > 0 ? this.getChildrenType(field.type!) : getFieldValue(field);
                 }
             }
             else if(n === 0){
