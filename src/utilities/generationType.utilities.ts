@@ -57,3 +57,14 @@ export const getGenerationType = (fieldType : FieldType) : GenerationTypeInterfa
         fieldType === FieldType.BOOLEAN ? booleanGenerationTypes : []
     );
 }
+
+export const haveOptions = (generationType : GenerationType) => {
+    if(
+        generationType === GenerationType.RANDOM_NUMBER
+    ){
+        return true;
+    }
+
+    return false;
+}
+

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Field } from "../../../interfaces/Field.interface";
 import { FieldType, FieldTypeInterface, fieldTypes } from "../../../utilities/FieldType.model";
-import { GenerationType, GenerationTypeInterface, getGenerationType } from "../../../utilities/generationType.utilities";
+import { GenerationType, GenerationTypeInterface, getGenerationType, haveOptions } from "../../../utilities/generationType.utilities";
 import { randomString } from "../../../utilities/randomString.method";
+import { getOptionsModal } from "../../../utilities/value/valueOptionsRenderer";
 
 interface JsonBuilderFieldProps{
     isHeader? : boolean;
@@ -70,7 +71,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
 
     function renderHeader(){
         return (
-            ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE'].map((title : string) => {
+            ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE', 'OPTIONS'].map((title : string) => {
                 return (
                     <div className={cellPrefix} key={title}>
                         <h1 className={cellTitlePrefix}>{title}</h1>
@@ -126,7 +127,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             );
         }
 
-        function renderFieldValue(){
+        function renderFieldValueCell(){
             function render(){
                 return props.field?.generationType === GenerationType.CUSTOM_VALUE ? 
                 <input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input> : 
@@ -144,13 +145,33 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             );
         }
 
+        function renderOptionsCell(){
+            if(isArrayOrObject()) return <div className={cellPrefix}></div>;
+
+            return(
+                <div className={cellPrefix}>
+                    {
+                        haveOptions(props.field?.generationType!) ? 
+                        <button className="json-builder-row-button">SET OPTIONS</button> :
+                        <></>
+                    }
+                </div>
+            );
+        }
+
+        function renderOptionsModal(){
+            return getOptionsModal();
+        }
+
         return (
             (
                 <>
                     {renderFieldNameCell()}
                     {renderFieldTypeCell()}
                     {renderFieldGenerationTypeCell()}
-                    {renderFieldValue()}
+                    {renderFieldValueCell()}
+                    {renderOptionsCell()}
+                    {renderOptionsModal()}
                 </>
             )
         )
