@@ -9,7 +9,6 @@ export default function Editor(){
     const [state, forceState] = useState(false);
 
     function generateJson(){
-        const x = FieldsManager.json;
         forceState(!state);
     }
 
