@@ -26,6 +26,9 @@ export default function JsonBuilderRow(props:any){
                 props.field!.children = [];
             }
         }
+        else{
+            props.field!.children = undefined;
+        }
 
         props.field!.type = event.target.value;
         props.field!.generationType = GenerationType.CUSTOM_VALUE;

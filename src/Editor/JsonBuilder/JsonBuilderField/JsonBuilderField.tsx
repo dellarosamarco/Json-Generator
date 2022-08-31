@@ -38,7 +38,6 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             parentId : props.field?.id,
             generationType : GenerationType.CUSTOM_VALUE,
             path : [],
-            children : [],
             options : {}
         } as Field);
 

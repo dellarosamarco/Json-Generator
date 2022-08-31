@@ -53,7 +53,7 @@ export default class FieldsManager{
         let paritalJson = json;
 
         if(path.length === 1){
-            paritalJson[path[0]] = field.children?.length! > 0 ? this.getChildrenType(field.type!) : getFieldValue(field);
+            paritalJson[path[0]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
             return paritalJson;
         }
 
@@ -62,10 +62,10 @@ export default class FieldsManager{
         for(let n=0; n<path.length; n++){
             if(n === path.length - 1){
                 if(this.getParentById(field.parentId!).type === FieldType.ARRAY){
-                    tmpPartialJson.push(field.children?.length! > 0 ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : getFieldValue(field)});
+                    tmpPartialJson.push(field.children ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : getFieldValue(field)});
                 }
                 else{
-                    tmpPartialJson[path[n]] = field.children?.length! > 0 ? this.getChildrenType(field.type!) : getFieldValue(field);
+                    tmpPartialJson[path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
                 }
             }
             else if(n === 0){

@@ -18,7 +18,6 @@ export default function JsonBuilder(){
             type : FieldType.STRING,
             generationType : GenerationType.CUSTOM_VALUE,
             path : [],
-            children : [],
             options : {}
         } as Field);
 
