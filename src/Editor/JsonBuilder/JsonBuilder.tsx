@@ -32,6 +32,7 @@ export default function JsonBuilder(){
                 className="json-builder-object"
                 style={{
                     display : 'flex',
+                    overflowY : 'auto'
                 }}
             >
                 {

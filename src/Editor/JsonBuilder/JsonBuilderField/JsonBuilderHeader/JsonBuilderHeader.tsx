@@ -8,7 +8,13 @@ export default function JsonBuilderHeader(){
             {
                 ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE', 'OPTIONS'].map((title : string) => {
                     return (
-                        <div className={cellPrefix} key={title}>
+                        <div 
+                            className={cellPrefix} 
+                            key={title}                                 
+                            style={{
+                                'borderRight': title !== 'OPTIONS' ? '1px solid rgba(225,225,225,0.1)' : ''
+                            }}
+                        >
                             <h1 className={cellTitlePrefix}>{title}</h1>
                         </div>
                     )
