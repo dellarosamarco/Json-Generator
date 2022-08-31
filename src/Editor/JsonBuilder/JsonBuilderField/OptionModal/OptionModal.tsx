@@ -131,6 +131,15 @@ export default function OptionModal(props : OptionModalProps) {
                 return (
                   <div className={prefix + "-body__list-container-item"}>
                     <p key={randomString()}>{choice}</p>
+                    <p 
+                      className={prefix + "-body__list-container-item-close"}
+                      onClick={() => {
+                        (props.field.options as ChoiceOptions).choices.splice((props.field.options as ChoiceOptions).choices.indexOf(choice),1);
+                        forceState(!state);
+                      }}
+                    >
+                      &#215;
+                    </p>
                   </div>
                 );
               }) : <></>
