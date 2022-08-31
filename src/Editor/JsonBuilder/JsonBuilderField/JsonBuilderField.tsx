@@ -3,6 +3,7 @@ import { Field } from "../../../interfaces/Field.interface";
 import { FieldType, FieldTypeInterface, fieldTypes } from "../../../utilities/FieldType.model";
 import { GenerationType, GenerationTypeInterface, getGenerationType, haveOptions } from "../../../utilities/generationType.utilities";
 import { randomString } from "../../../utilities/randomString.method";
+import JsonBuilderHeader from "./JsonBuilderHeader/JsonBuilderHeader";
 import OptionModal from "./OptionModal/OptionModal";
 
 interface JsonBuilderFieldProps{
@@ -75,18 +76,6 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
     const rowPrefix = props.isHeader ? "json-builder-row__header" : "json-builder-row__field";
     const cellPrefix = rowPrefix + "__cell";
     const cellTitlePrefix = cellPrefix + "-title";
-
-    function renderHeader(){
-        return (
-            ['FIELD NAME', 'TYPE','GENERATION TYPE', 'VALUE', 'OPTIONS'].map((title : string) => {
-                return (
-                    <div className={cellPrefix} key={title}>
-                        <h1 className={cellTitlePrefix}>{title}</h1>
-                    </div>
-                )
-            })
-        )
-    }
 
     function renderRows(){
 
@@ -206,7 +195,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
     return (
         <>
             <div className={"json-builder-row " + rowPrefix}>
-                { props.isHeader ? renderHeader() : renderRows() }
+                { props.isHeader ? <JsonBuilderHeader></JsonBuilderHeader> : renderRows() }
             </div>
 
             <OptionModal show={showOptionModal} showToggler={() => onToggleOptionsModal} field={props.field!}></OptionModal>
