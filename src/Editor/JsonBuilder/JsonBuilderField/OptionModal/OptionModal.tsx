@@ -58,11 +58,33 @@ export default function OptionModal(props : OptionModalProps) {
 
           <div>
             <input 
-              defaultValue={props.field.options.totalDecimals} 
+              defaultValue={(props.field.options as NumberOptions).totalDecimals} 
               placeholder="Total decimals" 
               type="number" 
               min="0" 
-              onChange={(e) => { props.field.options.totalDecimals = parseInt(e.target.value); }}>
+              onChange={(e) => { (props.field.options as NumberOptions).totalDecimals = parseInt(e.target.value); }}>
+            </input>
+          </div>
+        </div>
+      );
+    }
+    else if(props.field.generationType === GenerationType.RANDOM_DATE){
+      return(
+        <div 
+          className={prefix + "-body"}
+        >
+          <div className={prefix + "-body__field-container"}>
+            <input 
+              defaultValue={props.field.options.min} 
+              placeholder="min" 
+              type="date" 
+              onChange={(e) => { props.field.options.min = e.target.value; }}>
+            </input>
+            <input 
+              defaultValue={props.field.options.max} 
+              placeholder="max" 
+              type="date" 
+              onChange={(e) => { props.field.options.max = e.target.value; }}> 
             </input>
           </div>
         </div>

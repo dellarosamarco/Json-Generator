@@ -28,6 +28,7 @@ export default function JsonBuilderRow(props:any){
         }
 
         props.field!.type = event.target.value;
+        props.field!.generationType = GenerationType.CUSTOM_VALUE;
         props.updateState();
     }
 
@@ -38,20 +39,33 @@ export default function JsonBuilderRow(props:any){
 
     function renderRows(){
         function renderFieldValueCell(){
-            function render(){
+            function renderInput(){
                 return props.field?.generationType === GenerationType.CUSTOM_VALUE ? 
-                <input value={props.field!.value} onChange={(e) => onEditFieldValue(e)}></input> : 
-                <></>
+                    <input 
+                        value={props.field!.value} 
+                        onChange={(e) => onEditFieldValue(e)}
+                        type={
+                            props.field.type === FieldType.NUMBER ? 'number' :
+                            props.field.type === FieldType.DATE ? 'date' :
+                            props.field.type === FieldType.BOOLEAN ? 'checkbox' :
+                            'text'
+                        }
+                    >
+                    </input> : <></>
             }
 
             return(
-                <div className={cellPrefix}>
+                <>  
                     {
                         (!isArrayOrObject()) ? 
-                        (render()) 
-                        : <button className="json-builder-row-button" onClick={props.onToggleObject}>{ props.field?.fieldOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}</button>
+                        (renderInput()) :
+                        <button 
+                            className="json-builder-row-button" 
+                            onClick={props.onToggleObject}>
+                                { props.field?.fieldOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}
+                        </button>
                     }
-                </div>
+                </>
             );
         }
 
@@ -94,7 +108,11 @@ export default function JsonBuilderRow(props:any){
                         }
                     </div>
 
-                    {renderFieldValueCell()}
+                    <div className={cellPrefix}>
+                        {
+                            renderFieldValueCell()
+                        }
+                    </div>
 
                     {/* OPTIONS */}
                     <div className={cellPrefix}>

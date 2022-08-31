@@ -73,7 +73,8 @@ export const getGenerationType = (fieldType : FieldType) : GenerationTypeInterfa
 
 export const haveOptions = (generationType : GenerationType) => {
     if(
-        generationType === GenerationType.RANDOM_NUMBER
+        generationType === GenerationType.RANDOM_NUMBER ||
+        generationType === GenerationType.RANDOM_DATE
     ){
         return true;
     }
