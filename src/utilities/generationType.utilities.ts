@@ -6,7 +6,8 @@ export enum GenerationType{
     RANDOM_LAST_NAME = "Random last name",
     RANDOM_NUMBER = "Random number",
     RANDOM_BOOLEAN = "Random boolean",
-    RANDOM_DATE = "Random date"
+    RANDOM_DATE = "Random date",
+    RANDOM_CHOICE = "Random choice"
 }
 
 export interface GenerationTypeInterface{
@@ -26,6 +27,10 @@ export const stringGenerationTypes : GenerationTypeInterface[] = [
     {
         "name" : GenerationType.RANDOM_LAST_NAME.toString(),
         "type" : GenerationType.RANDOM_LAST_NAME
+    },
+    {
+        "name" : GenerationType.RANDOM_CHOICE.toString(),
+        "type" : GenerationType.RANDOM_CHOICE
     }
 ];
 
@@ -74,7 +79,8 @@ export const getGenerationType = (fieldType : FieldType) : GenerationTypeInterfa
 export const haveOptions = (generationType : GenerationType) => {
     if(
         generationType === GenerationType.RANDOM_NUMBER ||
-        generationType === GenerationType.RANDOM_DATE
+        generationType === GenerationType.RANDOM_DATE ||
+        generationType === GenerationType.RANDOM_CHOICE
     ){
         return true;
     }

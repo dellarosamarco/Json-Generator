@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Field } from "../../../../interfaces/Field.interface";
 import { GenerationType } from "../../../../utilities/generationType.utilities";
+import { randomString } from "../../../../utilities/randomString.method";
+import { ChoiceOptions } from "../../../../utilities/value/data/choices";
 import { NumberOptions } from "../../../../utilities/value/data/number";
 import "./OptionModal.scss";
 
@@ -12,6 +15,15 @@ interface OptionModalProps{
 }
 
 export default function OptionModal(props : OptionModalProps) {
+
+  const [inputValue, setInputValue] = useState("");
+
+  const [state, forceState] = useState(false);
+
+  function onEditInputValue(e : any){
+    setInputValue(e.target.value);
+  }
+
   return (
     <>
       {
@@ -86,6 +98,43 @@ export default function OptionModal(props : OptionModalProps) {
               type="date" 
               onChange={(e) => { props.field.options.max = e.target.value; }}> 
             </input>
+          </div>
+        </div>
+      );
+    }
+    else if(props.field.generationType === GenerationType.RANDOM_CHOICE){
+      return(
+        <div 
+          className={prefix + "-body"}
+        >
+          <div className={prefix + "-body__field-container"}>
+            <input 
+              placeholder="Add choice" 
+              onChange={(e) => onEditInputValue(e)}
+            >
+            </input>
+            <button
+              onClick={() => {
+                if((props.field.options as ChoiceOptions).choices === undefined){
+                  (props.field.options as ChoiceOptions).choices = [];
+                }
+
+                (props.field.options as ChoiceOptions).choices.push(inputValue);
+                forceState(!state);
+              }}
+            >Add</button>
+          </div>
+
+          <div className={prefix + "-body__list-container"}>
+            {
+              (props.field.options as ChoiceOptions).choices !== undefined ? (props.field.options as ChoiceOptions).choices.map((choice : string) => {
+                return (
+                  <div className={prefix + "-body__list-container-item"}>
+                    <p key={randomString()}>{choice}</p>
+                  </div>
+                );
+              }) : <></>
+            }
           </div>
         </div>
       );
