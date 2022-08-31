@@ -1,5 +1,6 @@
 import { FieldType } from "../utilities/FieldType.model";
 import { GenerationType } from "../utilities/generationType.utilities";
+import { NumberOptions } from "../utilities/value/data/number";
 
 export interface Field{
     id? : string;
@@ -11,4 +12,5 @@ export interface Field{
     children? : Field[];
     path: string[];
     fieldOpened? : boolean;
+    options : NumberOptions;
 }

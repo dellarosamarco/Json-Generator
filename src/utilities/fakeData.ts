@@ -10,6 +10,7 @@ export const fakeData : Field[] = [
         type: FieldType.ARRAY,
         generationType : GenerationType.CUSTOM_VALUE,
         path: [],
+        options : {},
         children : [
             {
                 id: 'LEVEL_2A', 
@@ -19,6 +20,7 @@ export const fakeData : Field[] = [
                 type: FieldType.ARRAY,
                 generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
+                options : {},
                 children : [
                     {
                         id: 'LEVEL_3A', 
@@ -28,6 +30,7 @@ export const fakeData : Field[] = [
                         type: FieldType.ARRAY,
                         generationType : GenerationType.CUSTOM_VALUE,
                         path: [],
+                        options : {},
                         children : [
                             {
                                 id: 'LEVEL_41', 
@@ -37,6 +40,7 @@ export const fakeData : Field[] = [
                                 type: FieldType.STRING,
                                 generationType : GenerationType.CUSTOM_VALUE,
                                 path: [],
+                                options : {}
                             }
                         ]
                     }
@@ -50,6 +54,7 @@ export const fakeData : Field[] = [
                 type: FieldType.STRING,
                 generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
+                options : {},
             },                
             {
                 id: 'LEVEL_2C', 
@@ -59,6 +64,7 @@ export const fakeData : Field[] = [
                 type: FieldType.STRING,
                 generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
+                options : {},
             }
         ]
     },
@@ -69,6 +75,7 @@ export const fakeData : Field[] = [
         type: FieldType.ARRAY,
         generationType : GenerationType.CUSTOM_VALUE,
         path: [],
+        options : {},
         children : [
             {
                 id: 'LEVEL_2A', 
@@ -78,6 +85,7 @@ export const fakeData : Field[] = [
                 type: FieldType.STRING,
                 generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
+                options : {},
             },                
             {
                 id: 'LEVEL_2B', 
@@ -87,6 +95,7 @@ export const fakeData : Field[] = [
                 type: FieldType.STRING,
                 generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
+                options : {},
             },                
             {
                 id: 'LEVEL_2C', 
@@ -96,6 +105,7 @@ export const fakeData : Field[] = [
                 type: FieldType.STRING,
                 generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
+                options : {},
             }
         ]
     }
@@ -109,6 +119,7 @@ export const fakeData2 : Field[] = [
         type: FieldType.ARRAY,
         generationType : GenerationType.CUSTOM_VALUE,
         path: [],
+        options : {},
         children : [
             {
                 id : 'AA',
@@ -118,6 +129,7 @@ export const fakeData2 : Field[] = [
                 type: FieldType.ARRAY,
                 generationType : GenerationType.CUSTOM_VALUE,
                 path : [],
+                options : {},
                 children : [
                     {
                         id: 'AAA', 
@@ -126,7 +138,8 @@ export const fakeData2 : Field[] = [
                         value: 'AAA', 
                         type: FieldType.STRING,
                         generationType : GenerationType.CUSTOM_VALUE,
-                        path: []
+                        path: [],
+                        options : {},
                     }
                 ]
             }

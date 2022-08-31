@@ -1,5 +1,6 @@
 import { Field } from "../../../../interfaces/Field.interface";
 import { GenerationType } from "../../../../utilities/generationType.utilities";
+import { NumberOptions } from "../../../../utilities/value/data/number";
 import "./OptionModal.scss";
 
 const prefix = "modal";
@@ -40,13 +41,29 @@ export default function OptionModal(props : OptionModalProps) {
         <div 
           className={prefix + "-body"}
         >
-          <div>
-            <input placeholder="min" type="number"></input>
-            <input placeholder="max" type="number"></input>
+          <div className={prefix + "-body__field-container"}>
+            <input 
+              defaultValue={props.field.options.min} 
+              placeholder="min" 
+              type="number" 
+              onChange={(e) => { props.field.options.min = parseInt(e.target.value); }}>
+            </input>
+            <input 
+              defaultValue={props.field.options.max} 
+              placeholder="max" 
+              type="number" 
+              onChange={(e) => { props.field.options.max = parseInt(e.target.value); }}> 
+            </input>
           </div>
 
           <div>
-            <input placeholder="Total decimals" type="number"></input>
+            <input 
+              defaultValue={props.field.options.totalDecimals} 
+              placeholder="Total decimals" 
+              type="number" 
+              min="0" 
+              onChange={(e) => { props.field.options.totalDecimals = parseInt(e.target.value); }}>
+            </input>
           </div>
         </div>
       );

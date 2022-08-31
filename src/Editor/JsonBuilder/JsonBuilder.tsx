@@ -18,7 +18,8 @@ export default function JsonBuilder(){
             type : FieldType.STRING,
             generationType : GenerationType.CUSTOM_VALUE,
             path : [],
-            children : []
+            children : [],
+            options : {}
         } as Field);
 
         setObjectTotalFields(FieldsManager.fields.length);

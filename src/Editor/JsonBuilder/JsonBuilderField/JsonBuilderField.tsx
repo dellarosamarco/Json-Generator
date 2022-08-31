@@ -61,7 +61,8 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
             parentId : props.field?.id,
             generationType : GenerationType.CUSTOM_VALUE,
             path : [],
-            children : []
+            children : [],
+            options : {}
         } as Field);
 
         forceState(!state);
