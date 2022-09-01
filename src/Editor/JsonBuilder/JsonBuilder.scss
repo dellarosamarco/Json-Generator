@@ -99,7 +99,7 @@
 
         &-button{
             width:250px;
-            height:40px;
+            min-height:40px;
             background-color: var(--tertiary-color);
             border:1px solid var(--border-primary-color);
             color:white;

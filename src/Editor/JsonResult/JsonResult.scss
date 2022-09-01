@@ -61,21 +61,5 @@
             margin:0px;
             padding:10px;
         }
-
-        &::-webkit-scrollbar {
-            width: 5px;
-        }
-        
-        &::-webkit-scrollbar-track {
-            background: var(--primary-color);
-        }
-        
-        &::-webkit-scrollbar-thumb {
-            background: white;
-        }
-        
-        &::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
     }
 }
