@@ -1,5 +1,4 @@
 export const getName = () : string => {
-    
     return names[Math.floor(Math.random() * names.length-1)+1]
 }
 

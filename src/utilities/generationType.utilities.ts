@@ -7,7 +7,8 @@ export enum GenerationType{
     RANDOM_NUMBER = "Random number",
     RANDOM_BOOLEAN = "Random boolean",
     RANDOM_DATE = "Random date",
-    RANDOM_CHOICE = "Random choice"
+    RANDOM_CHOICE = "Random choice",
+    RANDOM_CITY = "Random city"
 }
 
 export interface GenerationTypeInterface{
@@ -31,6 +32,10 @@ export const stringGenerationTypes : GenerationTypeInterface[] = [
     {
         "name" : GenerationType.RANDOM_CHOICE.toString(),
         "type" : GenerationType.RANDOM_CHOICE
+    },
+    {
+        "name" : GenerationType.RANDOM_CITY.toString(),
+        "type" : GenerationType.RANDOM_CITY
     }
 ];
 
