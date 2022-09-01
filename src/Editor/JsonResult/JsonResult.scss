@@ -3,6 +3,7 @@
     height:100%;
     background-color: var(--secondary-color);
     border-left: 1px solid var(--border-primary-color);
+    overflow-y: hidden;
 
     &__header{
         height:51px;
@@ -59,6 +60,22 @@
             color:white;
             margin:0px;
             padding:10px;
+        }
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background: var(--primary-color);
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background: white;
+        }
+        
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     }
 }
