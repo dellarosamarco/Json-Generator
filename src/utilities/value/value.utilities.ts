@@ -2,6 +2,7 @@ import { Field } from "../../interfaces/Field.interface";
 import { GenerationType } from "../generationType.utilities"
 import { ChoiceOptions, getChoice } from "./data/choices";
 import { getCity } from "./data/cities";
+import { getMastercard, getVisaCard } from "./data/creditCard";
 import { DateOptions, getDate } from "./data/date";
 import { getLastName } from "./data/lastname";
 import { getName } from "./data/names";
@@ -17,6 +18,8 @@ export const getFieldValue = (field : Field) : string | number | boolean => {
         case GenerationType.RANDOM_DATE : return getDate(field.options! as DateOptions);
         case GenerationType.RANDOM_CHOICE : return getChoice(field.options! as ChoiceOptions);
         case GenerationType.RANDOM_CITY : return getCity();
+        case GenerationType.RANDOM_VISA_CREDIT_CARD_NUMBER : return getVisaCard();
+        case GenerationType.RANDOM_MASTERCARD_CREDIT_CARD_NUMBER : return getMastercard();
         default : return "";
     }
 }

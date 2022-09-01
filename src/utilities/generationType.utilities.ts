@@ -8,7 +8,9 @@ export enum GenerationType{
     RANDOM_BOOLEAN = "Random boolean",
     RANDOM_DATE = "Random date",
     RANDOM_CHOICE = "Random choice",
-    RANDOM_CITY = "Random city"
+    RANDOM_CITY = "Random city",
+    RANDOM_VISA_CREDIT_CARD_NUMBER = "Random VISA Credit Card Number",
+    RANDOM_MASTERCARD_CREDIT_CARD_NUMBER = "Random Mastercard Credit Card Number"
 }
 
 export interface GenerationTypeInterface{
@@ -58,6 +60,14 @@ export const numberGenerationTypes : GenerationTypeInterface[] = [
     {
         "name" : GenerationType.RANDOM_NUMBER.toString(),
         "type" : GenerationType.RANDOM_NUMBER
+    },
+    {
+        "name" : GenerationType.RANDOM_VISA_CREDIT_CARD_NUMBER.toString(),
+        "type" : GenerationType.RANDOM_VISA_CREDIT_CARD_NUMBER
+    },
+    {
+        "name" : GenerationType.RANDOM_MASTERCARD_CREDIT_CARD_NUMBER.toString(),
+        "type" : GenerationType.RANDOM_MASTERCARD_CREDIT_CARD_NUMBER
     }
 ];
 
