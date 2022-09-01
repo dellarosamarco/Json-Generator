@@ -62,10 +62,23 @@ export default class FieldsManager{
         for(let n=0; n<path.length; n++){
             if(n === path.length - 1){
                 if(this.getParentById(field.parentId!).type === FieldType.ARRAY){
-                    tmpPartialJson.push(field.children ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : getFieldValue(field)});
+                    if(field.type === FieldType.OBJECT){
+                        tmpPartialJson.push(this.getChildrenType(field.type!));
+                    }
+                    else{
+                        tmpPartialJson.push(field.children ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : getFieldValue(field)});
+                    }
                 }
                 else{
-                    tmpPartialJson[path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
+                    const parent = this.getParentById(field.parentId!);
+                    const parentOfParent = this.getParentById(parent.parentId!);
+
+                    if(parent && parent.type === FieldType.OBJECT && parentOfParent && parentOfParent.type === FieldType.ARRAY){
+                        tmpPartialJson[tmpPartialJson.length-1][path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
+                    }
+                    else{
+                        tmpPartialJson[path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
+                    }
                 }
             }
             else if(n === 0){
