@@ -17,16 +17,7 @@
         button{
             height:100%;
             width: 150px;
-            background-color: var(--primary-color);
-            color:white;
-            cursor: pointer;
-            border: 1px solid var(--border-primary-color);
-            border-radius:5px;
             margin-left:10px;
-        }
-
-        button:hover{
-            background-color: var(--secondary-color);
         }
 
         &-repeat-container{
@@ -36,18 +27,11 @@
 
             h1{
                 font-size:15px;
-                color:white;
-                font-family: Arial, Helvetica, sans-serif;
             }
 
             input{
-                background-color: var(--primary-color);
-                border:1px solid var(--border-primary-color);
                 width:45px;
                 height:70%;
-                outline: none;
-                padding-left:5px;
-                color:white;
             }
         }
     }

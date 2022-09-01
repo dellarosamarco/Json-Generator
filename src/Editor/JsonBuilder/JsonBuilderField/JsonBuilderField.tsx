@@ -57,7 +57,7 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
                     backgroundColor: 'var(--tertiary-color)'
                 }}
             >
-                <button className="json-builder-object-button" onClick={onAddField}>ADD NEW FIELD</button>
+                <button onClick={onAddField}>ADD NEW FIELD</button>
                 {
                     [...new Array(props.field!.children?.length)].map((x : any, index : number) => {
                         return <JsonBuilderField field={props.field!.children![index]} key={randomString()}></JsonBuilderField>

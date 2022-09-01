@@ -29,3 +29,52 @@ html, body, #root{
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+p, h1, button, input, select{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+h1{
+    font-size: 15px;
+}
+
+button{
+    cursor: pointer;
+    background-color: var(--tertiary-color);
+    border:1px solid var(--border-primary-color);
+    border-radius: 5px;
+    outline: none;
+
+    &:hover{
+        background-color: var(--secondary-color);
+    }
+}
+
+input{
+    padding-left:10px;
+    outline: none;
+    padding-top:0px;
+    padding-bottom:0px;
+    background-color: var(--primary-color);
+    border:1px solid var(--border-primary-color);
+    border-radius: 5px;
+
+    &:focus{
+        background-color: var(--tertiary-color);
+        border:2px solid var(--border-focus-color);
+    }
+}
+
+select{
+    padding-left:10px;
+    outline: none;
+    background-color: var(--primary-color);
+    border:1px solid var(--border-primary-color);
+    border-radius: 5px;
+
+    &:focus{
+        background-color: var(--tertiary-color);
+        border:2px solid var(--border-focus-color);
+    }
+}

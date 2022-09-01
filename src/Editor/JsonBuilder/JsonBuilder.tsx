@@ -28,13 +28,7 @@ export default function JsonBuilder(){
         <div className="json-builder">
             <JsonBuilderField isHeader={true}></JsonBuilderField>
 
-            <div
-                className="json-builder-object"
-                style={{
-                    display : 'flex',
-                    overflowY : 'auto'
-                }}
-            >
+            <div className="json-builder-object">
                 {
                     [...new Array(objectTotalFields)].map((x : any, index : number) => {
                         return <JsonBuilderField field={FieldsManager.fields[index]} key={randomString()}></JsonBuilderField>

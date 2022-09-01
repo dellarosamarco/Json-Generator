@@ -63,7 +63,6 @@ export default function JsonBuilderRow(props:any){
                         (!isArrayOrObject()) ? 
                         (renderInput()) :
                         <button 
-                            className="json-builder-row-button" 
                             onClick={props.onToggleObject}>
                                 { props.field?.fieldOpened ? 'CLOSE OBJECT' : 'OPEN OBJECT'}
                         </button>
@@ -124,7 +123,6 @@ export default function JsonBuilderRow(props:any){
                                 isArrayOrObject() ? <></> :
                                     haveOptions(props.field?.generationType!) ? 
                                         <button 
-                                            className="json-builder-row-button" 
                                             onClick={props.onToggleOptionsModal}>
                                                 SET OPTIONS
                                         </button> : <></>
