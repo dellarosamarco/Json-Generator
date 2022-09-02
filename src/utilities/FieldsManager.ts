@@ -17,6 +17,30 @@ export default class FieldsManager{
             this.setRecursivePath(FieldsManager.fields, []);
         }
 
+        for(let x = 0; x < this.jsonMap.length; x++){
+            for(let y = 0; y < this.jsonMap.length; y++){
+                if(
+                    x !== y &&
+                    this.jsonMap[x].fieldName === this.jsonMap[y].fieldName && 
+                    this.jsonMap[x].parentId === this.jsonMap[y].parentId 
+                ){
+                    if(this.jsonMap[x].parentId && this.getParentById(this.jsonMap[x].parentId!).type === FieldType.ARRAY){
+                        continue;
+                    }
+
+                    return {
+                        "ERROR" : "Duplicated field name"
+                    }
+                }
+
+                if(this.jsonMap[x].fieldName === ""){
+                    return {
+                        "ERROR" : "Empty field name"
+                    }
+                }
+            }
+        }
+
         for(let n=0;n<this.repeat;n++){
             let partialJson : any = {};
             let depth = 1;

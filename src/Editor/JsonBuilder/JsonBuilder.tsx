@@ -28,7 +28,12 @@ export default function JsonBuilder(){
         <div className="json-builder">
             <JsonBuilderField isHeader={true}></JsonBuilderField>
 
-            <div className="json-builder-object">
+            <div 
+                className="json-builder-object"
+                style={{
+                    'overflowY' : 'scroll'
+                }}
+            >
                 {
                     [...new Array(objectTotalFields)].map((x : any, index : number) => {
                         return <JsonBuilderField field={FieldsManager.fields[index]} key={randomString()}></JsonBuilderField>
