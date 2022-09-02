@@ -46,6 +46,10 @@
         flex-direction: column;
         gap:20px;
 
+        label{
+            margin-right:10px;
+        }
+
         input{
             width:auto;
             height:35px;

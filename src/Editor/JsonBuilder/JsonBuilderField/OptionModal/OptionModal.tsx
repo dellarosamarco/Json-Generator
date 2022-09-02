@@ -53,14 +53,21 @@ export default function OptionModal(props : OptionModalProps) {
         <div 
           className={prefix + "-body"}
         >
-          <div className={prefix + "-body__field-container"}>
+          <div>
+            <label htmlFor="min">Min</label>
             <input 
+              id="min"
               defaultValue={props.field.options.min} 
               placeholder="min" 
               type="number" 
               onChange={(e) => { props.field.options.min = parseInt(e.target.value); }}>
             </input>
+          </div>
+
+          <div>
+            <label htmlFor="max">Max</label>
             <input 
+              id="max"
               defaultValue={props.field.options.max} 
               placeholder="max" 
               type="number" 
@@ -69,7 +76,9 @@ export default function OptionModal(props : OptionModalProps) {
           </div>
 
           <div>
+            <label htmlFor="decimals">Total decimals</label>
             <input 
+              id="decimals"
               defaultValue={(props.field.options as NumberOptions).totalDecimals} 
               placeholder="Total decimals" 
               type="number" 
@@ -86,13 +95,20 @@ export default function OptionModal(props : OptionModalProps) {
           className={prefix + "-body"}
         >
           <div className={prefix + "-body__field-container"}>
+            <label htmlFor="start">Start</label>
             <input 
+              style={{
+                'marginRight' : 50
+              }}
+              id="start"
               defaultValue={props.field.options.min} 
               placeholder="min" 
               type="date" 
               onChange={(e) => { props.field.options.min = e.target.value; }}>
             </input>
+            <label htmlFor="end">End</label>
             <input 
+              id="end"
               defaultValue={props.field.options.max} 
               placeholder="max" 
               type="date" 
