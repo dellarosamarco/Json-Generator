@@ -1,9 +1,18 @@
+import { Field } from "../../../../interfaces/Field.interface";
+import FieldsManager from "../../../../utilities/FieldsManager";
 import { FieldType, FieldTypeInterface, fieldTypes } from "../../../../utilities/FieldType.model";
 import { GenerationType, GenerationTypeInterface, getGenerationType, haveOptions } from "../../../../utilities/generationType.utilities";
 
-export default function JsonBuilderRow(props:any){
+interface JsonBuilderRowProps{
+    field : Field;
+    updateState : any;
+    onToggleObject : any;
+    onToggleOptionsModal : any;
+}
 
-    const rowPrefix = props.isHeader ? "json-builder-row__header" : "json-builder-row__field";
+export default function JsonBuilderRow(props:JsonBuilderRowProps){
+
+    const rowPrefix = "json-builder-row__field";
     const cellPrefix = rowPrefix + "__cell";
 
     const isArrayOrObject = () => {
@@ -38,6 +47,17 @@ export default function JsonBuilderRow(props:any){
     function onEditFieldGenerationType(event : any){
         props.field!.generationType = event.target.value;
         props.updateState();
+    }
+
+    function onDeleteField() {
+        if(props.field.parentId === undefined){
+            FieldsManager.fields.splice(FieldsManager.fields.indexOf(
+                FieldsManager.fields.filter((field : Field) => {
+                    return field.id === props.field.id;
+                })[0]
+            ),1);
+            props.updateState();
+        }
     }
 
     function renderRows(){
@@ -128,6 +148,24 @@ export default function JsonBuilderRow(props:any){
                                         </button> : <></>
                             )
                         }
+                    </div>
+
+                    {/* DELETE */}
+                    <div 
+                        className={cellPrefix} 
+                        style={{
+                            'width' : '5%',
+                            'minWidth' : '5%',
+                        }}
+                    >
+                        <button 
+                            style={{
+                                'width' : '100%',
+                            }}
+                            onClick={onDeleteField}
+                        >
+                            <p style={{'zoom' : '2', 'margin' : '0px', 'paddingTop' : '1px'}}>&#215;</p>
+                        </button>
                     </div>
                 </>
             )

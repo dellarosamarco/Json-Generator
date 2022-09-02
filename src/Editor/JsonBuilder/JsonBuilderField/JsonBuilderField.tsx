@@ -44,6 +44,10 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
         updateState();
     }
 
+    function onRemoveField(field : Field){
+        console.log(field);
+    }
+
     function onToggleOptionsModal(){
         setShowOptionModal(!showOptionModal);
     }
@@ -68,13 +72,13 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
     }
 
     return (
-        <>
+        props.field !== undefined || props.isHeader ? <>
             <div className={"json-builder-row " + rowPrefix}>
                 { 
                     props.isHeader ? 
                         <JsonBuilderHeader></JsonBuilderHeader> : 
                         <JsonBuilderRow 
-                            field={props.field} 
+                            field={props.field!} 
                             updateState={updateState} 
                             onToggleObject={onToggleObject} 
                             onToggleOptionsModal={onToggleOptionsModal} 
@@ -92,6 +96,6 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
                 !props.isHeader && (props.field!.type === FieldType.ARRAY || props.field!.type === FieldType.OBJECT) ? 
                 renderChildren() : <></> 
             }
-        </>
+        </> : <></>
     );
 }

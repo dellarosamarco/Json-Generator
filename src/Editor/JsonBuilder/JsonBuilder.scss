@@ -48,6 +48,9 @@
 
         &__field{
             height:65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }
