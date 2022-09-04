@@ -59,6 +59,7 @@ export default function JsonBuilderRow(props:JsonBuilderRowProps){
                 return props.field?.generationType === GenerationType.CUSTOM_VALUE ? 
                     <input 
                         value={props.field!.value} 
+                        placeholder="Value"
                         onChange={(e) => onEditFieldValue(e)}
                         type={
                             props.field.type === FieldType.NUMBER ? 'number' :
@@ -89,7 +90,7 @@ export default function JsonBuilderRow(props:JsonBuilderRowProps){
                 <>
                     {/* FIELD NAME */}
                     <div className={cellPrefix}>
-                        <input value={props.field!.fieldName} onChange={(e) => onEditFieldName(e)}></input>
+                        <input placeholder="Field name" value={props.field!.fieldName} onChange={(e) => onEditFieldName(e)}></input>
                     </div>
 
                     {/* FIELD TYPE */}
