@@ -44,10 +44,6 @@ export default function JsonBuilderField(props : JsonBuilderFieldProps){
         updateState();
     }
 
-    function onRemoveField(field : Field){
-        console.log(field);
-    }
-
     function onToggleOptionsModal(){
         setShowOptionModal(!showOptionModal);
     }

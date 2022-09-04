@@ -8,6 +8,7 @@ export default class FieldsManager{
     static composedJson = {};
     static jsonMap : Field[] = [];
     static repeat : number = 1;
+    static toggle : boolean = true;
 
     static get json(){
         this.jsonMap = [];
@@ -136,5 +137,39 @@ export default class FieldsManager{
                 this.setRecursivePath(field.children, field.path!);
             }
         }); 
+    }
+
+    static removeField(field : Field){
+        if(field.parentId === undefined){
+            FieldsManager.fields.splice(
+                FieldsManager.fields.indexOf(
+                    FieldsManager.fields.filter((_field : Field) => {
+                        return _field.id === field.id;
+                    })[0]
+                )
+            ,1);
+        }
+        else{
+            this.jsonMap = [];
+            this.setRecursivePath(FieldsManager.fields, []);
+
+            const path : string[] = this.jsonMap.filter((_field : Field) => { return _field.id === field.id })[0].path;
+
+            let fieldReference : Field;
+
+            fieldReference = FieldsManager.fields.filter((_field : Field) => { return _field.fieldName === path[0]})[0];
+
+            for(let n=1;n<path.length-1;n++){
+                fieldReference = fieldReference.children?.filter((_field : Field) => { return _field.fieldName === path[n]})[0]!;
+            }
+
+            fieldReference.children?.splice(
+                fieldReference.children.indexOf(
+                    fieldReference.children.filter((_field : Field) => {
+                        return _field.fieldName === path[path.length-1];
+                    })[0]
+                )
+            ,1);
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Field } from "../../interfaces/Field.interface";
 import { FieldType } from "../../utilities/FieldType.model";
 import FieldsManager from "../../utilities/FieldsManager";
@@ -8,7 +8,7 @@ import JsonBuilderField from "./JsonBuilderField/JsonBuilderField";
 import { GenerationType } from "../../utilities/generationType.utilities";
 
 export default function JsonBuilder(){
-    const [objectTotalFields, setObjectTotalFields] = useState(FieldsManager.fields.length);
+    const [totalFields, setTotalFields] = useState(1);
 
     function onAddField(){
         FieldsManager.fields.push({
@@ -20,10 +20,28 @@ export default function JsonBuilder(){
             path : [],
             options : {}
         } as Field);
-
-        setObjectTotalFields(FieldsManager.fields.length);
+        setTotalFields(FieldsManager.fields.length+1);
     }
-    
+
+    if(FieldsManager.toggle){
+        window.addEventListener('delete-field',deleteField);
+        FieldsManager.toggle = false;
+    };
+
+    function deleteField(e : any){
+        e.stopPropagation();
+
+        const field = e.detail.field as Field;
+
+        FieldsManager.removeField(field);
+
+        setTotalFields(FieldsManager.fields.length+2); 
+
+        setTimeout(() => {
+            setTotalFields(FieldsManager.fields.length+1); 
+        });
+    }
+
     return (
         <div className="json-builder">
             <JsonBuilderField isHeader={true}></JsonBuilderField>
@@ -35,7 +53,7 @@ export default function JsonBuilder(){
                 }}
             >
                 {
-                    [...new Array(objectTotalFields)].map((x : any, index : number) => {
+                    [...Array.from(new Array(totalFields))].map((x : any, index : number) => {
                         return <JsonBuilderField field={FieldsManager.fields[index]} key={randomString()}></JsonBuilderField>
                     })
                 }

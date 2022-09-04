@@ -50,14 +50,7 @@ export default function JsonBuilderRow(props:JsonBuilderRowProps){
     }
 
     function onDeleteField() {
-        if(props.field.parentId === undefined){
-            FieldsManager.fields.splice(FieldsManager.fields.indexOf(
-                FieldsManager.fields.filter((field : Field) => {
-                    return field.id === props.field.id;
-                })[0]
-            ),1);
-            props.updateState();
-        }
+        dispatchEvent(new CustomEvent('delete-field', {detail : {'field' : props.field}}))
     }
 
     function renderRows(){
