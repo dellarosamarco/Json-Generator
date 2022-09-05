@@ -8,7 +8,7 @@ import JsonBuilderField from "./JsonBuilderField/JsonBuilderField";
 import { GenerationType } from "../../utilities/generationType.utilities";
 
 export default function JsonBuilder(){
-    const [totalFields, setTotalFields] = useState(1);
+    const [totalFields, setTotalFields] = useState(FieldsManager.fields.length);
 
     function onAddField(){
         FieldsManager.fields.push({

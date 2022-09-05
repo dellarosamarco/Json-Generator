@@ -1,44 +1,38 @@
 import { Field } from "../interfaces/Field.interface";
 import { FieldType } from "./FieldType.model";
-import { fakeData, fakeData2 } from "./fakeData";
+import { fakeData } from "./fakeData";
 import { getFieldValue } from "./value/value.utilities";
 
 export default class FieldsManager{
-    static fields : Field[] = [];
+    static fields : Field[] = fakeData;
     static composedJson = {};
-    static jsonMap : Field[] = [];
     static repeat : number = 1;
     static toggle : boolean = true;
 
-    static get json(){
-        this.jsonMap = [];
-        const json : any = [];
+    private static _jsonMap : Field[] = [];
+
+    static get jsonMap() : Field[]{
+        this._jsonMap = [];
 
         if(FieldsManager.fields.length > 0){
             this.setRecursivePath(FieldsManager.fields, []);
         }
 
-        for(let x = 0; x < this.jsonMap.length; x++){
-            for(let y = 0; y < this.jsonMap.length; y++){
-                if(
-                    x !== y &&
-                    this.jsonMap[x].fieldName === this.jsonMap[y].fieldName && 
-                    this.jsonMap[x].parentId === this.jsonMap[y].parentId 
-                ){
-                    if(this.jsonMap[x].parentId && this.getParentById(this.jsonMap[x].parentId!).type === FieldType.ARRAY){
-                        continue;
-                    }
+        return this._jsonMap;
+    }
 
-                    return {
-                        "ERROR" : "Duplicated field name"
-                    }
+    static get json(){
+        const json : any = [];
+        const map = this.jsonMap;
+
+        for(let x = 0; x < map.length; x++){
+            for(let y = 0; y < map.length; y++){
+                if(x !== y && map[x].fieldName === map[y].fieldName && map[x].parentId === map[y].parentId){
+                    if(map[x].parentId && this.getParentById(map[x].parentId!).type === FieldType.ARRAY) continue;
+                    return { "ERROR" : "Duplicated field name" }
                 }
 
-                if(this.jsonMap[x].fieldName === ""){
-                    return {
-                        "ERROR" : "Empty field name"
-                    }
-                }
+                if(map[x].fieldName === "") return { "ERROR" : "Empty field name" }
             }
         }
 
@@ -130,7 +124,7 @@ export default class FieldsManager{
     static setRecursivePath(fields : Field[], path : string[]){
         fields.forEach((field : Field) => {    
             field.path = [...path, field.fieldName!]
-            this.jsonMap.push(field);
+            this._jsonMap.push(field);
 
             if(field.children !== undefined)
             {
@@ -150,8 +144,6 @@ export default class FieldsManager{
             ,1);
         }
         else{
-            this.jsonMap = [];
-            this.setRecursivePath(FieldsManager.fields, []);
 
             const path : string[] = this.jsonMap.filter((_field : Field) => { return _field.id === field.id })[0].path;
 

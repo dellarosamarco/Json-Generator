@@ -4,145 +4,119 @@ import { GenerationType } from "./generationType.utilities";
 
 export const fakeData : Field[] = [
     {
-        id: 'LEVEL_1A', 
-        fieldName: 'LEVEL_1A', 
-        value: 'b1', 
+        id: 'name', 
+        fieldName: 'Name', 
+        value: '', 
+        type: FieldType.STRING,
+        generationType : GenerationType.RANDOM_NAME,
+        path: [],
+        options : {},
+    },
+    {
+        id: 'children', 
+        fieldName: 'Children', 
+        value: '', 
         type: FieldType.ARRAY,
         generationType : GenerationType.CUSTOM_VALUE,
         path: [],
         options : {},
         children : [
-            {
-                id: 'LEVEL_2A', 
-                parentId : 'LEVEL_1A',
-                fieldName: 'LEVEL_2A', 
-                value: '2A', 
-                type: FieldType.ARRAY,
-                generationType : GenerationType.CUSTOM_VALUE,
-                path: [],
-                options : {},
-                children : [
-                    {
-                        id: 'LEVEL_3A', 
-                        parentId : 'LEVEL_1A',
-                        fieldName: 'LEVEL_3A', 
-                        value: '3A', 
-                        type: FieldType.ARRAY,
-                        generationType : GenerationType.CUSTOM_VALUE,
-                        path: [],
-                        options : {},
-                        children : [
-                            {
-                                id: 'LEVEL_41', 
-                                parentId : 'LEVEL_1A',
-                                fieldName: 'LEVEL_4A', 
-                                value: '4A', 
-                                type: FieldType.STRING,
-                                generationType : GenerationType.CUSTOM_VALUE,
-                                path: [],
-                                options : {}
-                            }
-                        ]
-                    }
-                ]
-            },                
-            {
-                id: 'LEVEL_2B', 
-                parentId : 'LEVEL_1A',
-                fieldName: 'LEVEL_2B', 
-                value: '2B', 
-                type: FieldType.STRING,
-                generationType : GenerationType.CUSTOM_VALUE,
-                path: [],
-                options : {},
-            },                
-            {
-                id: 'LEVEL_2C', 
-                parentId : 'LEVEL_1A',
-                fieldName: 'LEVEL_2C', 
-                value: '2C', 
-                type: FieldType.STRING,
-                generationType : GenerationType.CUSTOM_VALUE,
-                path: [],
-                options : {},
-            }
+            ...Array.from({length:10}).map((element : any, index : number) => {
+                return {
+                    id: 'Child' + index.toString(), 
+                    fieldName: 'Child' + index.toString(), 
+                    parentId: 'children',
+                    value: '', 
+                    type: FieldType.OBJECT,
+                    generationType : GenerationType.RANDOM_NAME,
+                    path: [],
+                    options : {},
+                    children : [
+                        {
+                            id: 'Child' + index.toString() + "name", 
+                            fieldName: 'Name', 
+                            parentId:'Child' + index.toString(), 
+                            value: '', 
+                            type: FieldType.STRING,
+                            generationType : GenerationType.RANDOM_NAME,
+                            path: [],
+                            options : {},
+                        }
+                    ]
+                } as Field
+            })
         ]
     },
     {
-        id: 'LEVEL_1B', 
-        fieldName: 'LEVEL_1B', 
-        value: 'b1', 
-        type: FieldType.ARRAY,
-        generationType : GenerationType.CUSTOM_VALUE,
+        id: 'date', 
+        fieldName: 'date', 
+        value: '', 
+        type: FieldType.DATE,
+        generationType : GenerationType.RANDOM_DATE,
         path: [],
         options : {},
-        children : [
-            {
-                id: 'LEVEL_2A', 
-                parentId : 'LEVEL_1A',
-                fieldName: 'LEVEL_2A', 
-                value: '2A 2', 
-                type: FieldType.STRING,
-                generationType : GenerationType.CUSTOM_VALUE,
-                path: [],
-                options : {},
-            },                
-            {
-                id: 'LEVEL_2B', 
-                parentId : 'LEVEL_1A',
-                fieldName: 'LEVEL_2B', 
-                value: '2B 2', 
-                type: FieldType.STRING,
-                generationType : GenerationType.CUSTOM_VALUE,
-                path: [],
-                options : {},
-            },                
-            {
-                id: 'LEVEL_2C', 
-                parentId : 'LEVEL_1A',
-                fieldName: 'LEVEL_2C', 
-                value: '2C 2', 
-                type: FieldType.STRING,
-                generationType : GenerationType.CUSTOM_VALUE,
-                path: [],
-                options : {},
-            }
-        ]
-    }
-];
-
-export const fakeData2 : Field[] = [
+    },
     {
-        id: 'A', 
-        fieldName: 'A', 
-        value: 'A', 
-        type: FieldType.ARRAY,
+        id: 'object', 
+        fieldName: 'object', 
+        value: '', 
+        type: FieldType.OBJECT,
         generationType : GenerationType.CUSTOM_VALUE,
         path: [],
         options : {},
-        children : [
+        children : [      
             {
-                id : 'AA',
-                parentId : 'A',
-                fieldName : 'AA',
-                value : 'AA',
-                type: FieldType.ARRAY,
+                id: 'date12', 
+                fieldName: 'date', 
+                parentId : 'object',
+                value: '', 
+                type: FieldType.DATE,
+                generationType : GenerationType.RANDOM_DATE,
+                path: [],
+                options : {},
+            },
+            {
+                id: 'city', 
+                fieldName: 'city', 
+                parentId : 'object',
+                value: '', 
+                type: FieldType.STRING,
+                generationType : GenerationType.RANDOM_CITY,
+                path: [],
+                options : {},
+            },
+            {
+                id: 'user', 
+                fieldName: 'user', 
+                parentId : 'object',
+                value: '', 
+                type: FieldType.OBJECT,
                 generationType : GenerationType.CUSTOM_VALUE,
-                path : [],
+                path: [],
                 options : {},
                 children : [
                     {
-                        id: 'AAA', 
-                        parentId : 'AA',
-                        fieldName: 'AAA', 
-                        value: 'AAA', 
-                        type: FieldType.STRING,
-                        generationType : GenerationType.CUSTOM_VALUE,
+                        id: 'date12asd', 
+                        fieldName: 'date', 
+                        parentId : 'user',
+                        value: '', 
+                        type: FieldType.DATE,
+                        generationType : GenerationType.RANDOM_DATE,
                         path: [],
                         options : {},
-                    }
+                    },
+                    {
+                        id: 'name12312', 
+                        fieldName: 'name', 
+                        parentId : 'user',
+                        value: '', 
+                        type: FieldType.STRING,
+                        generationType : GenerationType.RANDOM_NAME,
+                        path: [],
+                        options : {},
+                    },
                 ]
-            }
+            },
         ]
-    }
+    },
 ];
