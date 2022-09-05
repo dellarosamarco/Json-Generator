@@ -9,7 +9,7 @@ export interface Field{
     fieldName? : string;
     type? : FieldType;
     generationType : GenerationType;
-    value? : string;
+    value? : string | boolean;
     children? : Field[];
     path: string[];
     fieldOpened? : boolean;

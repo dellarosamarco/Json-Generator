@@ -66,6 +66,17 @@ input{
     }
 }
 
+input[type="checkbox"] {
+    accent-color: var(--tertiary-color);
+    background-color: yellow;
+    cursor: pointer;
+    width: 35px;
+
+    &:hover{
+        accent-color: rgb(50,50,80)
+    }
+}
+
 select{
     padding-left:10px;
     outline: none;

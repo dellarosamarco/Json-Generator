@@ -25,7 +25,13 @@ export default function JsonBuilderRow(props:JsonBuilderRowProps){
     }
 
     function onEditFieldValue(event : any){
-        props.field!.value = event.target.value;
+        if(props.field.type === FieldType.BOOLEAN){
+            props.field!.value = event.target.checked;
+        }
+        else{
+            props.field!.value = event.target.value;
+        }
+        
         props.updateState();
     }
 
@@ -40,6 +46,11 @@ export default function JsonBuilderRow(props:JsonBuilderRowProps){
         }
 
         props.field!.type = event.target.value;
+
+        if(props.field!.type === FieldType.BOOLEAN){
+            props.field.value = true;
+        }
+
         props.field!.generationType = GenerationType.CUSTOM_VALUE;
         props.updateState();
     }
@@ -58,8 +69,9 @@ export default function JsonBuilderRow(props:JsonBuilderRowProps){
             function renderInput(){
                 return props.field?.generationType === GenerationType.CUSTOM_VALUE ? 
                     <input 
-                        value={props.field!.value} 
+                        value={props.field!.value as string} 
                         placeholder="Value"
+                        checked={props.field!.value as boolean}
                         onChange={(e) => onEditFieldValue(e)}
                         type={
                             props.field.type === FieldType.NUMBER ? 'number' :
