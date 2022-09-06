@@ -40,8 +40,8 @@ export default class FieldsManager{
             let partialJson : any = {};
             let depth = 1;
 
-            while(depth <= this.jsonMap.length){
-                this.jsonMap.filter((field : Field) => {
+            while(depth <= map.length){
+                map.filter((field : Field) => {
                     return field.path.length === depth;
                 }).forEach((field : Field) => {
                     partialJson = this.setJsonValueByPath(partialJson, field.path, field);
@@ -76,32 +76,26 @@ export default class FieldsManager{
             return paritalJson;
         }
 
-        let tmpPartialJson : any;
+        let tmpPartialJson : any = paritalJson[path[0]];
         
-        for(let n=0; n<path.length; n++){
+        for(let n=1; n<path.length; n++){
             if(n === path.length - 1){
                 if(this.getParentById(field.parentId!).type === FieldType.ARRAY){
                     if(field.type === FieldType.OBJECT){
-                        tmpPartialJson.push(this.getChildrenType(field.type!));
+                        tmpPartialJson.push({});
                     }
                     else{
-                        tmpPartialJson.push(field.children ? { [path[n]] : this.getChildrenType(field.type!)} : { [path[n]] : getFieldValue(field)});
+                        tmpPartialJson.push({ [path[n]] : field.children ? [] : getFieldValue(field) });
                     }
+                }
+                else if(this.getParentById(this.getParentById(field.parentId!)?.parentId!)?.type === FieldType.ARRAY){
+                    // PARENT CHILDREN COUNTER MAPPING WITH PARENT OF PARENT ID??????
+                    console.log(field.index)
+                    tmpPartialJson[this.getParentById(field.parentId!).index!][path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
                 }
                 else{
-                    const parent = this.getParentById(field.parentId!);
-                    const parentOfParent = this.getParentById(parent.parentId!);
-
-                    if(parent && parent.type === FieldType.OBJECT && parentOfParent && parentOfParent.type === FieldType.ARRAY){
-                        tmpPartialJson[tmpPartialJson.length-1][path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
-                    }
-                    else{
-                        tmpPartialJson[path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
-                    }
+                    tmpPartialJson[path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
                 }
-            }
-            else if(n === 0){
-                tmpPartialJson = paritalJson[path[n]];
             }
             else{            
                 if(Array.isArray(tmpPartialJson)){
@@ -144,12 +138,9 @@ export default class FieldsManager{
             ,1);
         }
         else{
-
             const path : string[] = this.jsonMap.filter((_field : Field) => { return _field.id === field.id })[0].path;
 
-            let fieldReference : Field;
-
-            fieldReference = FieldsManager.fields.filter((_field : Field) => { return _field.fieldName === path[0]})[0];
+            let fieldReference : Field = FieldsManager.fields.filter((_field : Field) => { return _field.fieldName === path[0]})[0];;
 
             for(let n=1;n<path.length-1;n++){
                 fieldReference = fieldReference.children?.filter((_field : Field) => { return _field.fieldName === path[n]})[0]!;

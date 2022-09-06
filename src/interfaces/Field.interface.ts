@@ -14,4 +14,5 @@ export interface Field{
     path: string[];
     fieldOpened? : boolean;
     options : NumberOptions | DateOptions;
+    index? : number;
 }

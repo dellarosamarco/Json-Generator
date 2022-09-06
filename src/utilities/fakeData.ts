@@ -41,8 +41,10 @@ export const fakeData : Field[] = [
                             generationType : GenerationType.RANDOM_NAME,
                             path: [],
                             options : {},
+                            index : index
                         }
-                    ]
+                    ],
+                    index : index
                 } as Field
             })
         ]
@@ -74,6 +76,7 @@ export const fakeData : Field[] = [
                 generationType : GenerationType.RANDOM_DATE,
                 path: [],
                 options : {},
+                index : 1
             },
             {
                 id: 'city', 
@@ -84,6 +87,7 @@ export const fakeData : Field[] = [
                 generationType : GenerationType.RANDOM_CITY,
                 path: [],
                 options : {},
+                index : 2
             },
             {
                 id: 'user', 
@@ -94,6 +98,7 @@ export const fakeData : Field[] = [
                 generationType : GenerationType.CUSTOM_VALUE,
                 path: [],
                 options : {},
+                index : 3,
                 children : [
                     {
                         id: 'date12asd', 
@@ -104,6 +109,7 @@ export const fakeData : Field[] = [
                         generationType : GenerationType.RANDOM_DATE,
                         path: [],
                         options : {},
+                        index : 1
                     },
                     {
                         id: 'name12312', 
@@ -114,6 +120,7 @@ export const fakeData : Field[] = [
                         generationType : GenerationType.RANDOM_NAME,
                         path: [],
                         options : {},
+                        index : 2
                     },
                 ]
             },
