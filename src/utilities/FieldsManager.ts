@@ -5,7 +5,7 @@ import { getFieldValue } from "./value/value.utilities";
 import { RepeatOptions } from "./value/data/repeat";
 
 export default class FieldsManager{
-    static fields : Field[] = fakeData;
+    static fields : Field[] = [];
     static composedJson = {};
     static repeat : number = 1;
     static toggle : boolean = true;
