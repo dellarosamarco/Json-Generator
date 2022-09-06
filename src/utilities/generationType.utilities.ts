@@ -1,3 +1,5 @@
+import { Field } from "../interfaces/Field.interface";
+import FieldsManager from "./FieldsManager";
 import { FieldType } from "./FieldType.model";
 
 export enum GenerationType{
@@ -91,11 +93,12 @@ export const getGenerationType = (fieldType : FieldType) : GenerationTypeInterfa
     );
 }
 
-export const haveOptions = (generationType : GenerationType) => {
+export const haveOptions = (field : Field) => {
     if(
-        generationType === GenerationType.RANDOM_NUMBER ||
-        generationType === GenerationType.RANDOM_DATE ||
-        generationType === GenerationType.RANDOM_CHOICE
+        field.generationType === GenerationType.RANDOM_NUMBER ||
+        field.generationType === GenerationType.RANDOM_DATE ||
+        field.generationType === GenerationType.RANDOM_CHOICE ||
+        (field.parentId !== undefined && FieldsManager.getParentById(field.parentId).type === FieldType.ARRAY && field.type !== FieldType.ARRAY)
     ){
         return true;
     }

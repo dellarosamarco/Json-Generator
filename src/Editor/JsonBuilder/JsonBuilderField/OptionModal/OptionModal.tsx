@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Field } from "../../../../interfaces/Field.interface";
+import FieldsManager from "../../../../utilities/FieldsManager";
+import { FieldType } from "../../../../utilities/FieldType.model";
 import { GenerationType } from "../../../../utilities/generationType.utilities";
 import { randomString } from "../../../../utilities/randomString.method";
 import { ChoiceOptions } from "../../../../utilities/value/data/choices";
 import { NumberOptions } from "../../../../utilities/value/data/number";
+import { RepeatOptions } from "../../../../utilities/value/data/repeat";
 import "./OptionModal.scss";
 
 const prefix = "modal";
@@ -22,6 +25,26 @@ export default function OptionModal(props : OptionModalProps) {
 
   function onEditInputValue(e : any){
     setInputValue(e.target.value);
+  }
+
+  function renderRepeatSettings(){
+    if(props.field.parentId !== undefined && FieldsManager.getParentById(props.field.parentId).type === FieldType.ARRAY){
+      return (
+          <div>
+            <label htmlFor="repeat">Repeat</label>
+            <input 
+              id="repeat"
+              defaultValue={(props.field.options as RepeatOptions).repeat} 
+              placeholder="Repeat" 
+              type="number" 
+              onChange={(e) => { (props.field.options as RepeatOptions).repeat = parseInt(e.target.value); }}>
+            </input>
+          </div>
+        );
+    }
+    else{
+      return <></>;
+    }
   }
 
   return (
@@ -53,6 +76,10 @@ export default function OptionModal(props : OptionModalProps) {
         <div 
           className={prefix + "-body"}
         >
+          {
+            renderRepeatSettings()
+          }
+
           <div>
             <label htmlFor="min">Min</label>
             <input 
@@ -94,6 +121,10 @@ export default function OptionModal(props : OptionModalProps) {
         <div 
           className={prefix + "-body"}
         >
+          {
+            renderRepeatSettings()
+          }
+
           <div className={prefix + "-body__field-container"}>
             <label htmlFor="start">Start</label>
             <input 
@@ -123,6 +154,10 @@ export default function OptionModal(props : OptionModalProps) {
         <div 
           className={prefix + "-body"}
         >
+          {
+            renderRepeatSettings()
+          }
+
           <div className={prefix + "-body__field-container"}>
             <input 
               placeholder="Add choice" 
@@ -163,6 +198,15 @@ export default function OptionModal(props : OptionModalProps) {
           </div>
         </div>
       );
+    }
+    else{
+      return(
+        <div className={prefix + "-body"}>
+          {
+            renderRepeatSettings()
+          }
+        </div>
+      )
     }
   }
 }

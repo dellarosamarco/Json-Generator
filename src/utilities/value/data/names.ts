@@ -884,7 +884,6 @@ Stefan
 Josephine
 Dominick
 Jameson
-Bobbi
 Blanca
 Josue
 Esmeralda
@@ -1819,8 +1818,6 @@ Kisha
 Jeromy
 Dalton
 Cedrick
-Vera
-Tad
 Shonda
 Shequita
 Malorie
@@ -3315,7 +3312,6 @@ Anwar
 Amar
 Allana
 Yitzchok
-Tj
 Theodora
 Terron
 Terrill
@@ -3327,7 +3323,7 @@ Shalanda
 Rosana
 Ricki
 Rhoda
-Rebbecca
+Rebecca
 Raylene
 Rashard
 Phong
@@ -3336,7 +3332,6 @@ Opal
 Odell
 Nidia
 Nanette
-My
 Maryelizabeth
 Lynsie
 Lino
@@ -5212,8 +5207,6 @@ Zaida
 Wynter
 Wiliam
 Wendall
-Vy
-Vi
 Vashti
 Umar
 Tywan
@@ -5222,7 +5215,7 @@ Tyiesha
 Tyanna
 Trinh
 Tran
-Tommi
+Tommaso
 Toan
 Tiona
 Thane
@@ -5726,7 +5719,7 @@ Martisha
 Marshay
 Marlow
 Maricella
-Marcoantonio
+Marco
 Makia
 Mahlon
 Macario
@@ -5743,7 +5736,6 @@ Larita
 Laqueta
 Laquanta
 Lachandra
-Ky
 Kofi
 Kevon
 Kervin
@@ -6648,11 +6640,9 @@ Gaspar
 Garnett
 Garen
 Frederica
-Etta
-Estee
 Erron
-Ericca
-Ema
+Erica
+Emma
 Elexis
 Eldridge
 Edie
@@ -6667,7 +6657,6 @@ Devron
 Destany
 Denia
 Demetrus
-De
 Delroy
 Deepak
 Deeann
@@ -12929,8 +12918,6 @@ Loura
 Louella
 Lorrin
 Lorraina
-Lorn
-Lor
 Lorianna
 Loriana
 Lorenso
@@ -18081,7 +18068,6 @@ Arieal
 Argiro
 Arek
 Ared
-Arch
 Arabia
 Aquita
 Aquino
@@ -18211,8 +18197,6 @@ Ahslee
 Ahsha
 Agata
 Afshin
-Afnan
-Afaf
 Aerica
 Adwoa
 Adraine

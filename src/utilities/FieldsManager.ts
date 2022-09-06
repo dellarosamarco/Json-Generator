@@ -2,6 +2,7 @@ import { Field } from "../interfaces/Field.interface";
 import { FieldType } from "./FieldType.model";
 import { fakeData } from "./fakeData";
 import { getFieldValue } from "./value/value.utilities";
+import { RepeatOptions } from "./value/data/repeat";
 
 export default class FieldsManager{
     static fields : Field[] = fakeData;
@@ -44,6 +45,12 @@ export default class FieldsManager{
                 map.filter((field : Field) => {
                     return field.path.length === depth;
                 }).forEach((field : Field) => {
+                    // const repeat = (field.options as RepeatOptions).repeat ? (field.options as RepeatOptions).repeat : 1;
+
+                    // for(let i=0;i<repeat!;i++){
+                    //     partialJson = this.setJsonValueByPath(partialJson, field.path, field);
+                    // }
+
                     partialJson = this.setJsonValueByPath(partialJson, field.path, field);
                 });
     
@@ -84,14 +91,37 @@ export default class FieldsManager{
                     if(field.type === FieldType.OBJECT){
                         tmpPartialJson.push({});
                     }
+                    else if(field.type === FieldType.ARRAY){
+                        tmpPartialJson.push({ [path[n]] : [] });
+                    }
                     else{
-                        tmpPartialJson.push({ [path[n]] : field.children ? [] : getFieldValue(field) });
+                        let repeat = (field.options as RepeatOptions).repeat ? (field.options as RepeatOptions).repeat! : 1;
+
+                        for(let i=0;i<repeat;i++){
+                            tmpPartialJson.push({ [path[n]] : getFieldValue(field) });
+                        }
                     }
                 }
                 else if(this.getParentById(this.getParentById(field.parentId!)?.parentId!)?.type === FieldType.ARRAY){
-                    // PARENT CHILDREN COUNTER MAPPING WITH PARENT OF PARENT ID??????
-                    console.log(field.index)
-                    tmpPartialJson[this.getParentById(field.parentId!).index!][path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
+                    const parent = this.getParentById(field.parentId!);
+                    let repeat = (parent.options as RepeatOptions).repeat ? (parent.options as RepeatOptions).repeat! : 1;
+
+                    tmpPartialJson[parent.index!][path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
+
+                    if(repeat > 1){
+                        repeat--;
+                        
+                        for(let i=0;i<repeat;i++){
+                            if(field.type === FieldType.OBJECT){
+                                tmpPartialJson.push({});
+                            }
+                            else{
+                                tmpPartialJson.push({ [path[n]] : field.children ? [] : getFieldValue(field) });
+                            }
+                            
+                            tmpPartialJson[tmpPartialJson.length-1][path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
+                        }
+                    }
                 }
                 else{
                     tmpPartialJson[path[n]] = field.children ? this.getChildrenType(field.type!) : getFieldValue(field);
@@ -153,6 +183,15 @@ export default class FieldsManager{
                     })[0]
                 )
             ,1);
+
+            let index = 0;
+
+            fieldReference.children?.forEach((field : Field) => {
+                if(field.index !== undefined){
+                    field.index = index;
+                }
+                index++;
+            });
         }
     }
 }

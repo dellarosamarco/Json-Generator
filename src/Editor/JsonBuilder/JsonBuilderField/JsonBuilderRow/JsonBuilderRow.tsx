@@ -146,12 +146,11 @@ export default function JsonBuilderRow(props:JsonBuilderRowProps){
                     <div className={cellPrefix}>
                         {
                             (
-                                isArrayOrObject() ? <></> :
-                                    haveOptions(props.field?.generationType!) ? 
-                                        <button 
-                                            onClick={props.onToggleOptionsModal}>
-                                                SET OPTIONS
-                                        </button> : <></>
+                                haveOptions(props.field) ? 
+                                    <button 
+                                        onClick={props.onToggleOptionsModal}>
+                                            SET OPTIONS
+                                    </button> : <></>
                             )
                         }
                     </div>
